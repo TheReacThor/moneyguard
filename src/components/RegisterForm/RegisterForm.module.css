@@ -57,6 +57,7 @@
   height: 24px;
   position: absolute;
   margin-top: 3px;
+  margin-left: 11px;
   left: 0px;
   top: 50%;
   transform: translateY(-50%);
@@ -66,7 +67,7 @@
   height: 35px;
   border: none;
   border-bottom: 1px solid var(--white-400);
-  padding-left: 40px;
+  padding-left: calc(40px + 11px);
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 18px;
