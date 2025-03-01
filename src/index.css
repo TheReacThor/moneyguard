@@ -1,0 +1,5 @@
+/* Modern Normalize */
+@import 'modern-normalize/modern-normalize.css';
+
+/* Global CSS Variables */
+@import './utils/variables.css';

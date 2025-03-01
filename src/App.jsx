@@ -1,7 +1,11 @@
+import LoginPage from './pages/LoginPage/LoginPage';
+import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
+
 function App() {
   return (
     <>
-      <h1>APP</h1>
+      {/* <LoginPage /> */}
+      <RegistrationPage />
     </>
   );
 }
