@@ -5,8 +5,28 @@ import passwordIcon from '../../assets/Icons/passwordIcon.svg';
 import { Form, Formik, Field, ErrorMessage } from 'formik';
 import loginValidationSchema from '../../schemas/loginValidationSchema';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { loginThunk } from '../../redux/Auth/operations';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+    const handleSubmit = (values, { resetForm }) => {
+        dispatch(loginThunk(values))
+            .unwrap()
+            .then(data => {
+                toast.success(`Welcome ${data.user.username}!`);
+                navigate('/')
+            })
+            .catch(() => {
+                toast.error('Invalid credentials');
+            });
+        resetForm();
+    };
+
   const initialValues = {
     email: '',
     password: '',
@@ -23,10 +43,7 @@ function LoginForm() {
         <Formik
           initialValues={initialValues}
           validationSchema={loginValidationSchema}
-          onSubmit={(values, action) => {
-            console.log(values);
-            action.resetForm();
-          }}
+          onSubmit={handleSubmit}
         >
           {({ isSubmitting }) => (
             <Form className={style.form}>

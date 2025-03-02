@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getBalance, register, login, logout, refresh } from "../../services/auth-api";
+import { getBalance, register, login, logout, refreshUser } from "../../services/auth-api";
 
 export const registerThunk = createAsyncThunk('auth/register', async (credentials, thunkAPI) => {
   // -Kullanıcı kaydı için gerekli fonksiyon...
@@ -34,7 +34,7 @@ export const logoutThunk = createAsyncThunk('auth/logout', async (_, thunkAPI) =
 export const refreshThunk = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
   // -Kullanıcıların verilerini (balance) güncellemek için gerekli fonksiyon...
   try {
-    const data = await refresh();
+    const data = await refreshUser();
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);

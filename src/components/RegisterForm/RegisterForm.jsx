@@ -7,8 +7,27 @@ import { Form, Formik, Field, ErrorMessage } from 'formik';
 import registrationValidationSchema from '../../schemas/registrationValidationSchema';
 import { Link } from 'react-router-dom';
 import PasswordStrengthBar from 'react-password-strength-bar-with-style-item';
+import { useDispatch } from 'react-redux';
+import { registerThunk } from '../../redux/Auth/operations';
+import { toast } from 'react-toastify';
 
 function RegisterForm() {
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = ({ username, email, password }, { resetForm }) => {
+    dispatch(registerThunk({ username, email, password }))
+        .unwrap()
+        .then(data => {
+            toast.success(`Registration is success ${data.user.name}, welcome!`);
+        })
+        .catch(() => {
+            toast.error('Invalid credentials');
+        });
+
+    resetForm();
+};
+
   const initialValues = {
     name: '',
     email: '',
@@ -27,10 +46,7 @@ function RegisterForm() {
         <Formik
           initialValues={initialValues}
           validationSchema={registrationValidationSchema}
-          onSubmit={(values, actions) => {
-            console.log(values);
-            actions.resetForm();
-          }}
+          onSubmit={handleSubmit}
         >
           {({ isSubmitting, values }) => (
             <Form className={style.form}>
