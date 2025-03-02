@@ -4,20 +4,11 @@ import nameIcon from '../../assets/Icons/nameIcon.svg';
 import emailIcon from '../../assets/Icons/emailIcon.svg';
 import passwordIcon from '../../assets/Icons/passwordIcon.svg';
 import { Form, Formik, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import registrationValidationSchema from '../../schemas/registrationValidationSchema';
+// import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function RegisterForm() {
-  // Formik için validation schema- Daha sonra schema klasorune kaldirilacak
-  const validationSchema = Yup.object({
-    name: Yup.string().required('Name is required').min(3, 'Name must be at least 3 characters'),
-    email: Yup.string().email('Invalid email address').required('Email is required'),
-    password: Yup.string().required('Password is required'),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
-      .required('Confirm Password is required'),
-  });
-
-  // Formik initial values
   const initialValues = {
     name: '',
     email: '',
@@ -34,10 +25,10 @@ function RegisterForm() {
 
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={(values, action) => {
+        validationSchema={registrationValidationSchema}
+        onSubmit={(values, actions) => {
           console.log(values);
-          action.resetForm();
+          actions.resetForm();
         }}
       >
         {({ isSubmitting }) => (
@@ -83,13 +74,13 @@ function RegisterForm() {
             {/* Strong Pass ile ilgili Library'e bakicam... */}
             <div className={style.buttons}>
               <button type='submit' className={style.buttonRegister} disabled={isSubmitting}>
-                Register
+                REGISTER
               </button>
-              <a href='/login'>
+              <Link href='/login'>
                 <button type='button' className={style.buttonLogin}>
-                  Log in
+                  LOG IN
                 </button>
-              </a>
+              </Link>
             </div>
           </Form>
         )}

@@ -3,16 +3,9 @@ import moneyGuardIcon from '../../assets/moneyGuard.svg';
 import emailIcon from '../../assets/Icons/emailIcon.svg';
 import passwordIcon from '../../assets/Icons/passwordIcon.svg';
 import { Form, Formik, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import loginValidationSchema from '../../schemas/loginValidationSchema';
 
 function LoginForm() {
-  // Formik için validation schema- Daha sonra schema klasorune kaldirilacak
-  const validationSchema = Yup.object({
-    email: Yup.string().email('Invalid email address').required('Email is required'),
-    password: Yup.string().required('Password is required'),
-  });
-
-  // Formik initial values
   const initialValues = {
     email: '',
     password: '',
@@ -27,7 +20,7 @@ function LoginForm() {
 
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        validationSchema={loginValidationSchema}
         onSubmit={(values, action) => {
           console.log(values);
           action.resetForm();
@@ -58,11 +51,11 @@ function LoginForm() {
             {/* Strong Pass ile ilgili Library'e bakicam... */}
             <div className={style.buttons}>
               <button type='submit' className={style.buttonRegister} disabled={isSubmitting}>
-                Register
+                REGISTER
               </button>
               <a href='/login'>
                 <button type='button' className={style.buttonLogin}>
-                  Log in
+                  LOG IN{' '}
                 </button>
               </a>
             </div>
