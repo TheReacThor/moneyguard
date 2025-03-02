@@ -1,5 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
+import LoginPage from './pages/LoginPage/LoginPage';
+import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
 
 import HomeTab from "./components/HomeTab/HomeTab";
 import PublicRoute from "./routes/PublicRoute";
@@ -14,9 +16,9 @@ function App() {
       <Routes>
         {/* Public routes will be added here */}
         <Route element={<PublicRoute restricted={true} />}>
-          {/* Login ve register page olduğunda buraları açabiliriz */}
-          {/* <Route path="/login" element={<LoginPage />} */}
-          {/* <Route path="/register" element={<RegisterPage />} /> */}
+          <Route path='/' element={<Navigate to='/login' replace />} />
+          <Route path='/register' element={<RegistrationPage />} />
+          <Route path='/login' element={<LoginPage />} />
         </Route>
 
         {/* PrivateRoute wrapper will be added when authentication is implemented */}
