@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
+
 // Other imports will be added as they are implemented
 
 function App() {
