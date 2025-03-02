@@ -1,8 +1,8 @@
 // transactionsSlice içinden transaction'ları almak için selector
-export const selectTransactions = (state) => state.transactions.transactions;
+export const selectTransactions = (state) => state.transactions.items;
 
-// transactionsSlice içinden isTransLoading bilgisini almak için selector
-export const selectTransLoading = (state) => state.transactions.isTransLoading;
+// transactionsSlice içinden isLoading bilgisini almak için selector
+export const selectTransLoading = (state) => state.transactions.isLoading;
 
-// transactionsSlice içinden isTransError bilgisini almak için selector selector
-export const selectTransError = (state) => state.transactions.isTransError;
+// transactionsSlice içinden error bilgisini almak için selector
+export const selectTransError = (state) => state.transactions.error;
