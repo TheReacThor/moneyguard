@@ -8,21 +8,29 @@
   background-attachment: fixed;
   backdrop-filter: blur(100px);
   box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .title {
-  width: 128px;
   margin-top: 97px;
   margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.moneyGuardIcon {
+  width: 27px;
+  height: 26px;
 }
 .titleText {
   font-family: var(--font-family);
@@ -87,7 +95,7 @@ input:-webkit-autofill:active {
 }
 
 .error {
-  color: #ff0000;
+  color: var(--dashboard-text);
   font-size: 12px;
   margin-top: 5px;
 }
@@ -127,4 +135,57 @@ input:-webkit-autofill:active {
   color: var(--text-button);
   box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
   background: #fcfcfc;
+}
+@media only screen and (min-width: 768px) {
+  .background {
+    background-image: url('../../assets/login-tablet.webp');
+  }
+  .form {
+    width: 409px;
+  }
+  .container {
+    border-radius: 8px;
+    width: 533px;
+    /* height: 624px; */
+    backdrop-filter: blur(100px);
+    box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
+    background: var(--form-color);
+  }
+  .title {
+    margin-top: 80px;
+    margin-bottom: 22px;
+  }
+  .moneyGuardIcon {
+    width: 36;
+    height: 36;
+  }
+  .titleText {
+    font-size: 26px;
+  }
+
+  .input {
+    width: 409px;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--white-600) !important;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  .buttonRegister {
+    width: 300px;
+  }
+  .buttonLogin {
+    width: 300px;
+    margin-bottom: 40px;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .background {
+    background-image: url('../../assets/login-desktop.webp');
+  }
 }
