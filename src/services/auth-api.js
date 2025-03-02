@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // API'nin base URL'ini tanımla
-const BASE_URL = 'https://wallet.goit.ua'; // Bu URL örnek olarak verilmiştir, gerçek URL'i kullanın
+const BASE_URL = 'https://wallet.b.goit.study';
 
 // Axios instance'ını oluştur
 export const instance = axios.create({
@@ -10,6 +10,16 @@ export const instance = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+// Token ayarlama fonksiyonu
+export const setToken = (token) => {
+  instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+// Token kaldırma fonksiyonu
+export const removeToken = () => {
+  instance.defaults.headers.common.Authorization = ``;
+};
 
 // Token'ı localStorage'dan alıp Authorization header'ına ekleyen interceptor
 instance.interceptors.request.use(
@@ -45,6 +55,7 @@ instance.interceptors.response.use(
         // localStorage.removeItem('token');
         // localStorage.removeItem('refreshToken');
         // window.location.href = '/login';
+        console.log(error);
       }
     }
     return Promise.reject(error);
@@ -69,5 +80,10 @@ export const logout = async () => {
 
 export const refreshUser = async () => {
   const { data } = await instance.get('/api/users/current');
+  return data;
+};
+
+export const getBalance = async () => {
+  const { data } = await instance.get('/api/users/balance');
   return data;
 };
