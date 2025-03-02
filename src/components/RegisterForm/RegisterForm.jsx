@@ -5,8 +5,8 @@ import emailIcon from '../../assets/Icons/emailIcon.svg';
 import passwordIcon from '../../assets/Icons/passwordIcon.svg';
 import { Form, Formik, Field, ErrorMessage } from 'formik';
 import registrationValidationSchema from '../../schemas/registrationValidationSchema';
-// import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PasswordStrengthBar from 'react-password-strength-bar-with-style-item';
 
 function RegisterForm() {
   const initialValues = {
@@ -31,7 +31,7 @@ function RegisterForm() {
           actions.resetForm();
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, values }) => (
           <Form className={style.form}>
             <div className={style.inputWrapper}>
               <div className={style.inputContainer}>
@@ -70,8 +70,14 @@ function RegisterForm() {
                 />
               </div>
               <ErrorMessage name='confirmPassword' component='div' className={style.error} />
+              <PasswordStrengthBar
+                password={values.password}
+                className={style.passwordStrengthBar}
+                scoreWords={[]}
+                scoreColors={['#ffb627', '#ffb627', '#ffb627', '#ffb627']}
+                //  /* still veremedim buna bakicam tekrardan */
+              />
             </div>
-            {/* Strong Pass ile ilgili Library'e bakicam... */}
             <div className={style.buttons}>
               <button type='submit' className={style.buttonRegister} disabled={isSubmitting}>
                 REGISTER
