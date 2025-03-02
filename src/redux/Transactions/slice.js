@@ -1,43 +1,60 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  addTransactions,
-  deleteTransactions,
-  editTransactions,
-  getTransactions,
+import { 
+  fetchTransactions, 
+  createTransaction, 
+  editTransaction, 
+  removeTransaction, 
+  fetchTransactionsByCategory 
 } from "./operations";
-
-const initialState = {
-  isTransLoading: false,
-  isTransError: null,
-  transactions: [],
-};
 
 const slice = createSlice({
   name: "transactions",
-  initialState,
+  initialState: {
+    items: [], // İşlem listesi
+    isLoading: false,
+    error: null,
+  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
-      // getTransactions için extraReducers
-      .addCase(getTransactions.fulfilled, () => {})
-      .addCase(getTransactions.pending, () => {})
-      .addCase(getTransactions.rejected, () => {})
-
-      // addTransactions için extraReducers
-      .addCase(addTransactions.fulfilled, () => {})
-      .addCase(addTransactions.pending, () => {})
-      .addCase(addTransactions.rejected, () => {})
-
-      // deleteTransactions için ekstraReducers
-      .addCase(deleteTransactions.fulfilled, () => {})
-      .addCase(deleteTransactions.pending, () => {})
-      .addCase(deleteTransactions.rejected, () => {})
-
-      // editTransactions için ekstraReducers
-      .addCase(editTransactions.fulfilled, () => {})
-      .addCase(editTransactions.pending, () => {})
-      .addCase(editTransactions.rejected, () => {});
-
-    // Proje tamamlandığında birbirini tekrar eden extraReducerlar için bir fonksiyon yazılabilir
+      .addCase(fetchTransactions.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchTransactions.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = action.payload;
+      })
+      .addCase(fetchTransactions.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(createTransaction.fulfilled, (state, action) => {
+        state.items.push(action.payload); // Yeni işlemi listeye ekle
+      })
+      .addCase(editTransaction.fulfilled, (state, action) => {
+        // Güncellenen işlemi listede bul ve güncelle
+        const index = state.items.findIndex((item) => item.id === action.payload.id);
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
+      })
+      .addCase(removeTransaction.fulfilled, (state, action) => {
+        // Silinen işlemi listeden kaldır
+        state.items = state.items.filter((item) => item.id !== action.payload.id);
+      })
+      .addCase(fetchTransactionsByCategory.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchTransactionsByCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = action.payload;
+      })
+      .addCase(fetchTransactionsByCategory.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
   },
 });
 
