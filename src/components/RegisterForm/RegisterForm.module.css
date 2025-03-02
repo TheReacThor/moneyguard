@@ -1,6 +1,6 @@
 .background {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: #101010;
   background-image: url(../../assets/gradient-mobile.webp);
   background-repeat: no-repeat;

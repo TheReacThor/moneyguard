@@ -76,7 +76,7 @@ function RegisterForm() {
               <button type='submit' className={style.buttonRegister} disabled={isSubmitting}>
                 REGISTER
               </button>
-              <Link href='/login'>
+              <Link to='/login'>
                 <button type='button' className={style.buttonLogin}>
                   LOG IN
                 </button>

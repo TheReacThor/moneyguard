@@ -4,6 +4,7 @@ import emailIcon from '../../assets/Icons/emailIcon.svg';
 import passwordIcon from '../../assets/Icons/passwordIcon.svg';
 import { Form, Formik, Field, ErrorMessage } from 'formik';
 import loginValidationSchema from '../../schemas/loginValidationSchema';
+import { Link } from 'react-router-dom';
 
 function LoginForm() {
   const initialValues = {
@@ -51,13 +52,13 @@ function LoginForm() {
             {/* Strong Pass ile ilgili Library'e bakicam... */}
             <div className={style.buttons}>
               <button type='submit' className={style.buttonRegister} disabled={isSubmitting}>
-                REGISTER
+                LOG IN
               </button>
-              <a href='/login'>
+              <Link to='/register'>
                 <button type='button' className={style.buttonLogin}>
-                  LOG IN{' '}
+                  REGISTER
                 </button>
-              </a>
+              </Link>
             </div>
           </Form>
         )}
