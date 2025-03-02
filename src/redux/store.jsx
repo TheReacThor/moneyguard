@@ -21,7 +21,7 @@ import { transactionReducer } from "./Transactions/slice";
 const persistConfig = {
   key: "root",
   storage,
-  // whitelist: ['auth'], Hangi slice localstorage'a kaydediliceğini yazıcaz buraya örn. auth-token
+  //whitelist: ['auth']
 };
 
 const rootReducer = combineReducers({

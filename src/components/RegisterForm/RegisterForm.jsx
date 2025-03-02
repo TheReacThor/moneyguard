@@ -15,8 +15,8 @@ function RegisterForm() {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = ({ username, email, password }, { resetForm }) => {
-    dispatch(registerThunk({ username, email, password }))
+  const handleSubmit = ({ name, email, password }, { resetForm }) => {
+    dispatch(registerThunk({ username: name, email, password }))
         .unwrap()
         .then(data => {
             toast.success(`Registration is success ${data.user.name}, welcome!`);
