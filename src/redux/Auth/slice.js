@@ -98,8 +98,8 @@ const slice = createSlice({
       .addCase(getBalanceThunk.fulfilled, (state, { payload }) => {
         state.user.balance = payload;
       })
-      //.addCase(getBalanceThunk.pending, (state) => { state.isAuthLoading = true; })
-      //.addCase(getBalanceThunk.rejected, (state) => { state.isAuthLoading = false; });
+    //.addCase(getBalanceThunk.pending, (state) => { state.isAuthLoading = true; })
+    //.addCase(getBalanceThunk.rejected, (state) => { state.isAuthLoading = false; });
 
     // Proje tamamlandığında birbirini tekrar eden extraReducerlar için bir fonksiyon yazılabilir
   },

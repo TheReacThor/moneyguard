@@ -1,19 +1,25 @@
 import { useSelector } from "react-redux";
-//import { logoutUser } from '../redux/auth/auth-slice'; // Sonra eklenecek
-import styles from "./Header.module.css"; //Stil dosyasının import edilmesi
+import { useState } from "react";
+import styles from "./Header.module.css";
 import HeaderLogoSvg from "./HeaderLogoSvg";
 import HeaderExitSvg from "./HeaderExitSvg";
 import { Link } from "react-router-dom";
+import LogOutModal from "../LogOutModal/LogOutModal.jsx";
+
+
 
 const Header = () => {
-  //   const dispatch = useDispatch();
-  const email = useSelector((state) => state.auth.user?.email); // Redux'tan email'i al
-  const username = email ? email.split("@")[0] : ""; // @ işaretinden önceki kısmı al
+  const email = useSelector((state) => state.auth.user?.email) || "";
+  const username = email.split("@")[0] || "anonymous";
 
-  const handleLogout = () => {
-    //  dispatch(logoutUser());
-    // Şimdilik konsola yazdır, sonra LogOutModal açılacak
-    console.log("Logout clicked");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleLogoutClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -27,12 +33,13 @@ const Header = () => {
           {username ? username : "Hello anonymous"}
         </span>
         <div>
-          <button className={styles.logoutButton} onClick={handleLogout}>
+          <button className={styles.logoutButton} onClick={handleLogoutClick}>
             <HeaderExitSvg />
             Exit
           </button>
         </div>
       </div>
+      {isModalOpen && <LogOutModal onClose={closeModal} />}
     </header>
   );
 };
