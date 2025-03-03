@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { 
-  fetchTransactions, 
-  createTransaction, 
-  editTransaction, 
-  removeTransaction, 
-  fetchTransactionsByCategory 
+import {
+  fetchTransactions,
+  editTransaction,
+  removeTransaction,
+  fetchTransactionsByCategory,
+  addTransactions,
 } from "./operations";
 
 const slice = createSlice({
@@ -29,19 +29,32 @@ const slice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(createTransaction.fulfilled, (state, action) => {
-        state.items.push(action.payload); // Yeni işlemi listeye ekle
+      .addCase(addTransactions.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addTransactions.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items.push(action.payload);
+      })
+      .addCase(addTransactions.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       })
       .addCase(editTransaction.fulfilled, (state, action) => {
         // Güncellenen işlemi listede bul ve güncelle
-        const index = state.items.findIndex((item) => item.id === action.payload.id);
+        const index = state.items.findIndex(
+          (item) => item.id === action.payload.id
+        );
         if (index !== -1) {
           state.items[index] = action.payload;
         }
       })
       .addCase(removeTransaction.fulfilled, (state, action) => {
         // Silinen işlemi listeden kaldır
-        state.items = state.items.filter((item) => item.id !== action.payload.id);
+        state.items = state.items.filter(
+          (item) => item.id !== action.payload.id
+        );
       })
       .addCase(fetchTransactionsByCategory.pending, (state) => {
         state.isLoading = true;
@@ -58,4 +71,4 @@ const slice = createSlice({
   },
 });
 
-export const transactionReducer = slice.reducer;
+export const transactionsReducer = slice.reducer;

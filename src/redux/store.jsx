@@ -16,7 +16,7 @@ import { authReducer } from "./Auth/slice";
 import { currencyReducer } from "./Currency/slice";
 import { modalsReducer } from "./Modals/slice";
 import { statisticsReducer } from "./Statistics/slice";
-import { transactionReducer } from "./Transactions/slice";
+import { transactionsReducer } from "./Transactions/slice";
 
 const persistConfig = {
   key: "root",
@@ -26,7 +26,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  transactions: transactionReducer,
+  transactions: transactionsReducer,
   statistics: statisticsReducer,
   currency: currencyReducer,
   modals: modalsReducer,
