@@ -1,14 +1,14 @@
 import React from "react";
 import { IoAdd } from "react-icons/io5";
+import { useDispatch } from "react-redux";
+import { openAddModal } from "../../redux/Modals/slice";
 import styles from "./ButtonAddTransactions.module.css";
-// import { useDispatch } from 'react-redux'; // Sonra eklenecek
 
 const ButtonAddTransactions = () => {
-  //const dispatch = useDispatch(); // Sonra eklenecek
+  const dispatch = useDispatch();
+
   const handleClick = () => {
-    //dispatch(setAddTransaction(true))
-    console.log("Add Transaction button clicked");
-    // Modal açılacak (sonraki task'lerde)
+    dispatch(openAddModal());
   };
 
   return (
