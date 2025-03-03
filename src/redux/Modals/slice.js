@@ -20,8 +20,15 @@ const slice = createSlice({
     /* burası modal yapıldıktan sonra doldurulucak */
   },
   reducers: {
-    /* burası modal yapıldıktan sonra doldurulucak */
+    openAddModal: (state) => {
+      state.isAddModalOpen = true;
+    },
+    closeAddModal: (state) => {
+      state.isAddModalOpen = false;
+    },
   },
 });
 
+export const { openAddModal, closeAddModal } = slice.actions;
+export const selectIsAddModalOpen = (state) => state.modals.isAddModalOpen;
 export const modalsReducer = slice.reducer;
