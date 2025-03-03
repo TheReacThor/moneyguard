@@ -22,14 +22,27 @@ export const loginThunk = createAsyncThunk('auth/login', async (credentials, thu
 });
 
 export const logoutThunk = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
-  // -Kullanıcı çıkışı için gerekli fonksiyon...
   try {
-    const data = await logout();
-    return data;
+    console.log("logoutThunk çalışıyor...");
+
+    // Çıkış API isteği gönderiliyor
+    const response = await logout();
+
+    console.log("Çıkış başarılı:", response);
+
+    // LocalStorage'dan token siliniyor
+    localStorage.removeItem("token");
+
+    // Başarılıysa veriyi döndür
+    return response;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+    console.error("logoutThunk hata:", error);
+
+    // Hata mesajını yakala ve redux'a gönder
+    return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
   }
 });
+
 
 export const refreshThunk = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
   // -Kullanıcıların verilerini (balance) güncellemek için gerekli fonksiyon...
