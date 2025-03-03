@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import TransactionList from '../TransactionList/TransactionList'; // Sonra oluşturulacak
-import Balance from '../Balance/Balance'; // Sonra oluşturulacak
-import { fetchTransactions } from '../../redux/Transactions/operations'; // Task 13'ten
-import styles from './HomeTab.module.css';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import TransactionList from "../TransactionList/TransactionList"; // Sonra oluşturulacak
+import Balance from "../Balance/Balance"; // Sonra oluşturulacak
+import { fetchTransactions } from "../../redux/Transactions/operations"; // Task 13'ten
+import Navigation from "../Navigation/Navigation";
+import styles from "./HomeTab.module.css";
 
 const HomeTab = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,10 @@ const HomeTab = () => {
 
   return (
     <div className={styles.container}>
-      <Balance />
+      <div className={styles.sidebar}>
+        <Navigation />
+        <Balance />
+      </div>
       <TransactionList />
     </div>
   );
