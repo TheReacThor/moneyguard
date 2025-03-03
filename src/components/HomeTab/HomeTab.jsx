@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import TransactionList from "../TransactionList/TransactionList"; // Sonra oluşturulacak
 import Balance from "../Balance/Balance"; // Sonra oluşturulacak
+import ButtonAddTransactions from "../ButtonAddTransactions/ButtonAddTransactions";
 import { fetchTransactions } from "../../redux/Transactions/operations"; // Task 13'ten
 import Navigation from "../Navigation/Navigation";
 import styles from "./HomeTab.module.css";
@@ -20,6 +21,7 @@ const HomeTab = () => {
         <Balance />
       </div>
       <TransactionList />
+      <ButtonAddTransactions />
     </div>
   );
 };
