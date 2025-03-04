@@ -1,13 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 
 // API'nin base URL'ini tanımla
-const BASE_URL = 'https://wallet.b.goit.study';
+const BASE_URL = "https://wallet.b.goit.study";
 
 // Axios instance'ını oluştur
 export const instance = axios.create({
   baseURL: BASE_URL,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
@@ -24,7 +24,7 @@ export const removeToken = () => {
 // Token'ı localStorage'dan alıp Authorization header'ına ekleyen interceptor
 instance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -64,26 +64,26 @@ instance.interceptors.response.use(
 
 // Auth API fonksiyonları burada tanımlanabilir
 export const register = async (userData) => {
-  const { data } = await instance.post('/api/auth/sign-up', userData);
+  const { data } = await instance.post("/api/auth/sign-up", userData);
   return data;
 };
 
 export const login = async (userData) => {
-  const { data } = await instance.post('/api/auth/sign-in', userData);
+  const { data } = await instance.post("/api/auth/sign-in", userData);
   return data;
 };
 
 export const logout = async () => {
-  const { data } = await instance.post('/api/auth/sign-out');
+  const { data } = await instance.delete("/api/auth/sign-out");
   return data;
 };
 
 export const refreshUser = async () => {
-  const { data } = await instance.get('/api/users/current');
+  const { data } = await instance.get("/api/users/current");
   return data;
 };
 
 export const getBalance = async () => {
-  const { data } = await instance.get('/api/users/balance');
+  const { data } = await instance.get("/api/users/balance");
   return data;
 };
