@@ -1,58 +1,76 @@
-import React, { useRef, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { logoutThunk } from '/src/redux/Auth/operations';
-import styles from './LogOutModal.module.css';
+import { useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutThunk } from "/src/redux/Auth/operations";
+import styles from "./LogOutModal.module.css";
 
+import LogOutModalSvg from "./LogOutModalSvg";
+import { setToken } from "../../services/auth-api";
+
+// eslint-disable-next-line react/prop-types
 const LogOutModal = ({ onClose }) => {
-    const dispatch = useDispatch();
-    const modalRef = useRef(null);
+  const dispatch = useDispatch();
+  const modalRef = useRef(null);
+  const token = useSelector((state) => state.auth.token);
 
-    const handleConfirmLogout = () => {
-        console.log("Evet butonuna tıklandı!");
-        dispatch(logoutThunk());
+  const handleConfirmLogout = () => {
+    dispatch(logoutThunk());
+    onClose();
+  };
+
+  const handleCancelLogout = () => {
+    onClose();
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
         onClose();
+      }
     };
 
-
-    const handleCancelLogout = () => {
+    const handleEscapeKey = (event) => {
+      if (event.key === "Escape") {
         onClose();
+      }
     };
 
-    useEffect(() => {
-        const handleOutsideClick = (event) => {
-            if (modalRef.current && !modalRef.current.contains(event.target)) {
-                onClose();
-            }
-        };
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("keydown", handleEscapeKey);
 
-        const handleEscapeKey = (event) => {
-            if (event.key === 'Escape') {
-                onClose();
-            }
-        };
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [onClose]);
 
-        document.addEventListener('mousedown', handleOutsideClick);
-        document.addEventListener('keydown', handleEscapeKey);
+  useEffect(() => {
+    if (token) {
+      setToken(token);
+    }
+  }, [token]);
 
-        return () => {
-            document.removeEventListener('mousedown', handleOutsideClick);
-            document.removeEventListener('keydown', handleEscapeKey);
-        };
-    }, [onClose]);
-
-    return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.modalContent} ref={modalRef}>
-                <p>Çıkış yapmak istediğinize emin misiniz?</p>
-                <button className={styles.confirmButton} onClick={handleConfirmLogout}>
-                    Evet
-                </button>
-                <button className={styles.cancelButton} onClick={handleCancelLogout}>
-                    Hayır
-                </button>
-            </div>
+  return (
+    <div className={styles.modalOverlay}>
+      <div className={styles.modalContent} ref={modalRef}>
+        <div>
+          <LogOutModalSvg />
+          <h3 className={styles.modalTitle}>Money Guard</h3>
         </div>
-    );
+        <p className={styles.modalPElem}>Are you sure you want to log out?</p>
+        <div className={styles.btnDiv}>
+          <button
+            className={styles.confirmButton}
+            onClick={handleConfirmLogout}
+          >
+            Logout
+          </button>
+          <button className={styles.cancelButton} onClick={handleCancelLogout}>
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default LogOutModal;

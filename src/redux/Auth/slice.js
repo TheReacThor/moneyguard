@@ -88,7 +88,7 @@ const slice = createSlice({
         state.isAuthLoading = true;
         state.isLoggedIn = true;
       })
-      .addCase(refreshThunk.rejected, state => {
+      .addCase(refreshThunk.rejected, (state) => {
         state.isRefreshing = false;
         state.isAuthLoading = false;
         state.isLoggedIn = false;
@@ -97,7 +97,7 @@ const slice = createSlice({
       // getBalanceThunk için ekstraReducers
       .addCase(getBalanceThunk.fulfilled, (state, { payload }) => {
         state.user.balance = payload;
-      })
+      });
     //.addCase(getBalanceThunk.pending, (state) => { state.isAuthLoading = true; })
     //.addCase(getBalanceThunk.rejected, (state) => { state.isAuthLoading = false; });
 
