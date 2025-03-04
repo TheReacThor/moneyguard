@@ -32,6 +32,7 @@
 }
 .confirmButton,
 .cancelButton {
+  box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
   border: none;
   padding: 0px;
