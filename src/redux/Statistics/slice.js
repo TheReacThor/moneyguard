@@ -16,14 +16,34 @@ const slice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      //getTransactionsCategories için extraReducers
-      .addCase(getTransactionsCategories.fulfilled, () => {})
-      .addCase(getTransactionsCategories.pending, () => {})
-      .addCase(getTransactionsCategories.rejected, () => {})
-      //getTransactionsSummaryByPeriod için extraReducers
-      .addCase(getTransactionsSummaryByPeriod.fulfilled, () => {})
-      .addCase(getTransactionsSummaryByPeriod.pending, () => {})
-      .addCase(getTransactionsSummaryByPeriod.rejected, () => {});
+      // getTransactionsCategories için extraReducers
+      .addCase(getTransactionsCategories.fulfilled, (state, action) => {
+        state.categories = action.payload;
+        state.isStatisticsLoading = false;
+        state.isStatisticsError = null;
+      })
+      .addCase(getTransactionsCategories.pending, (state) => {
+        state.isStatisticsLoading = true;
+        state.isStatisticsError = null;
+      })
+      .addCase(getTransactionsCategories.rejected, (state, action) => {
+        state.isStatisticsLoading = false;
+        state.isStatisticsError = action.payload;
+      })
+      // getTransactionsSummaryByPeriod için extraReducers
+      .addCase(getTransactionsSummaryByPeriod.fulfilled, (state, action) => {
+        state.summary = action.payload;
+        state.isStatisticsLoading = false;
+        state.isStatisticsError = null;
+      })
+      .addCase(getTransactionsSummaryByPeriod.pending, (state) => {
+        state.isStatisticsLoading = true;
+        state.isStatisticsError = null;
+      })
+      .addCase(getTransactionsSummaryByPeriod.rejected, (state, action) => {
+        state.isStatisticsLoading = false;
+        state.isStatisticsError = action.payload;
+      });
   },
 });
 

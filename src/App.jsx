@@ -7,15 +7,20 @@ import ModalAddTransaction from './components/ModalAddTransaction/ModalAddTransa
 import HomeTab from './components/HomeTab/HomeTab';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
-import ModalEditTransaction from './components/ModalEditTransaction/ModalEditTransaction';
 
 // Other imports will be added as they are implemented
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTransactionsCategories());
+  }, [dispatch]);
   return (
     <>
       <Routes>
         {/* Public routes will be added here */}
+
         <Route element={<PublicRoute restricted={true} />}>
           <Route path='/register' element={<RegistrationPage />} />
           <Route path='/login' element={<LoginPage />} />
@@ -27,7 +32,6 @@ function App() {
           <Route path='/' element={<DashboardPage />} />
           <Route path='/dashboard' element={<DashboardPage />} />
           <Route path='/home' element={<HomeTab />} />
-          <Route path='/dashboard/levent' element={<ModalEditTransaction />} />
         </Route>
 
         <Route path='*' element={<Navigate to='/' replace />} />
