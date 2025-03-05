@@ -2,25 +2,67 @@ import style from './EditTransactionForm.module.css';
 import dividerIcon from '../../assets/Icons/dividerIcon.svg';
 import { Form, Formik, Field } from 'formik';
 import editTransactionFormValidationSchema from '../../schemas/EditTransactionFormValidationSchema';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { editTransaction } from '../../redux/Transactions/operations';
+import { selectCategories } from '../../redux/Statistics/selectors';
+import { openEditModal, closeEditModal } from '../../redux/Modals/slice';
+import { selectTransactions } from '../../redux/Transactions/selectors';
+import { format } from 'date-fns';
 
-const initialValues = {
-  amount: Math.abs(transaction.amount),
-  transactionDate: new Date(transaction.transactionDate),
-  category: transaction.categoryId,
-  comment: transaction.comment,
-  type: transaction.type,
-};
+const EditTransactionForm = () => {
+  const categories = useSelector(selectCategories);
+  const transactions = useSelector(selectTransactions);
+  const dispatch = useDispatch();
+  const IdForEdit = useSelector(openEditModal);
 
-const handleSubmit = (values) => {
-  console.log(values);
-};
+  const foundObject = transactions.find((item) => item.id === IdForEdit);
 
-function EditTransactionForm() {
-  const transaction = useSelector(editTransaction);
-  // const [showField, setShowField] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
+  useEffect(() => {
+    if (foundObject.type === 'INCOME') {
+      setIsChecked(false);
+    } else if (foundObject.type === 'EXPENSE') {
+      setIsChecked(true);
+    }
+  }, [foundObject.type]);
+
+  const initialValues = {
+    amount: Math.abs(foundObject.amount),
+    transactionDate: new Date(foundObject.transactionDate),
+    type: foundObject.type,
+    category: foundObject.categoryId,
+    comment: foundObject.comment,
+  };
+
+  const handleSubmit = (values) => {
+    const data = { ...values };
+    if (!isChecked) {
+      const categoryId = categories.find((el) => el.name === 'Income').id;
+      data.categoryId = categoryId;
+      data.type = 'INCOME';
+    } else {
+      data.type = 'EXPENSE';
+      data.amount = Math.abs(data.amount);
+    }
+
+    const formattedDate = format(new Date(data.transactionDate), 'yyyy-MM-dd');
+    data.transactionDate = formattedDate;
+
+    if (foundObject.type === 'INCOME') {
+      data.categoryId = foundObject.categoryId;
+      data.amount = Math.abs(data.amount);
+    } else {
+      data.categoryId = data.category || foundObject.categoryId;
+      data.amount = Math.abs(data.amount) * -1;
+    }
+
+    dispatch(editTransaction({ id: IdForEdit, transaction: data }));
+    dispatch(closeEditModal());
+  };
+
   return (
     <>
       <div className={style.title}>
@@ -28,18 +70,47 @@ function EditTransactionForm() {
         <img src={dividerIcon} alt='divider Icon' />
         <h3 className={style.expenseTitle}>Expense</h3>
       </div>
-      {/* Form inputs */}
       <Formik
         initialValues={initialValues}
         validationSchema={editTransactionFormValidationSchema}
         onSubmit={handleSubmit}
       >
-        <Form>
-          <Field name='amount' type='number' />
-        </Form>
+        {({ values, setFieldValue }) => (
+          <Form className={style.form}>
+            <Field className={style.input} name='amount' type='number' placeholder='8000.00' />
+
+            <DatePicker
+              selected={values.transactionDate}
+              dateFormat='dd.MM.yyyy'
+              className={`${style.input} ${style.date}`}
+              name='transactionDate'
+              onChange={(date) => setFieldValue('transactionDate', date)}
+            />
+
+            <Field
+              as='textarea'
+              className={`${style.input} ${style.textarea}`}
+              name='comment'
+              placeholder='January bonus'
+            />
+
+            <div className={style.btn_wrap}>
+              <button className={style.btn} type='submit'>
+                Save
+              </button>
+              <button
+                className={style.btn}
+                type='button'
+                onClick={() => dispatch(closeEditModal())}
+              >
+                Cancel
+              </button>
+            </div>
+          </Form>
+        )}
       </Formik>
     </>
   );
-}
+};
 
 export default EditTransactionForm;

@@ -1,20 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   transaction: {
-    transactionDate: "",
-    type: "",
-    categoryId: "",
-    comment: "",
+    transactionDate: '',
+    type: '',
+    categoryId: '',
+    comment: '',
     amount: 0,
   },
   isEditModalOpen: false,
   isAddModalOpen: false,
-  isEditId: "",
+  isEditId: '',
 };
 
 const slice = createSlice({
-  name: "modals",
+  name: 'modals',
   initialState,
   selectors: {
     /* burası modal yapıldıktan sonra doldurulucak */
@@ -25,6 +25,14 @@ const slice = createSlice({
     },
     closeAddModal: (state) => {
       state.isAddModalOpen = false;
+    },
+    openEditModal: (state, action) => {
+      state.isEditModalOpen = true;
+      state.isEditId = action.payload;
+    },
+    closeEditModal: (state) => {
+      state.isEditModalOpen = false;
+      state.isEditId = '';
     },
   },
 });

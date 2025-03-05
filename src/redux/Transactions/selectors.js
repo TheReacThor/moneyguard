@@ -6,3 +6,5 @@ export const selectTransLoading = (state) => state.transactions.isLoading;
 
 // transactionsSlice içinden error bilgisini almak için selector
 export const selectTransError = (state) => state.transactions.error;
+// modalsSlice içinden isEditID bilgisini almak için selector
+export const selectIsEditID = (state) => state.modals.isEditID;

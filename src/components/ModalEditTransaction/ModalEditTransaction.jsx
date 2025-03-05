@@ -17,7 +17,7 @@ function ModalEditTransaction() {
       isOpen={isAddOpen}
       className={style.modal}
       overlayClassName={style.modalWrap}
-      onRequestClose={closeAddModal}
+      onRequestClose={handleClose}
     >
       <div className={style.modalClose} onClick={handleClose}>
         <img src={modalCloseIcon} alt='Modal Close Icon' />
