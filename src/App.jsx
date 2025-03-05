@@ -1,5 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
+
+import Statistics from "./components/Statistics/Statistics";
+
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
 import ModalAddTransaction from "./components/ModalAddTransaction/ModalAddTransaction";
@@ -8,6 +11,7 @@ import HomeTab from "./components/HomeTab/HomeTab";
 import PublicRoute from "./routes/PublicRoute";
 import PrivateRoute from "./routes/PrivateRoute";
 
+
 // Other imports will be added as they are implemented
 
 function App() {
@@ -15,6 +19,7 @@ function App() {
     <>
       <Routes>
         {/* Public routes will be added here */}
+
         <Route element={<PublicRoute restricted={true} />}>
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -26,6 +31,7 @@ function App() {
           <Route path="/" element={<DashboardPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/home" element={<HomeTab />} />
+          <Route path="/statistics" element={<Statistics />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
