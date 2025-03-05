@@ -17,7 +17,55 @@ import { closeAddModal } from "../../redux/Modals/slice";
 import CustomDropIndicator from "../CustomDropIndicator/CustomDropIndicator";
 
 function AddTransactionForm() {
-  const categories = useSelector(selectCategories);
+  // API'dan gelen kategoriler
+  const categoriesFromAPI = useSelector(selectCategories);
+  
+  // Eğer API'dan kategoriler gelmezse, varsayılan kategorileri kullan
+  const defaultCategories = [
+    {
+      id: "c9d9e447-1b83-4238-8712-edc77b18b739",
+      name: "Main expenses",
+      type: "EXPENSE"
+    },
+    {
+      id: "27eb4b75-9a42-4991-a802-4aefe21ac3ce",
+      name: "Products",
+      type: "EXPENSE"
+    },
+    {
+      id: "3caa7ba0-79c0-40b9-ae1f-de1af1f6e386",
+      name: "Car",
+      type: "EXPENSE"
+    },
+    {
+      id: "bbdd58b8-e804-4ab9-bf4f-695da5ef64f4",
+      name: "Self care",
+      type: "EXPENSE"
+    },
+    {
+      id: "76cc875a-3b43-4eae-8fdb-f76633821a34",
+      name: "Child care",
+      type: "EXPENSE"
+    },
+    {
+      id: "128673b5-2f9a-46ae-a428-ec48cf1effa1",
+      name: "Household products",
+      type: "EXPENSE"
+    },
+    {
+      id: "1272fcc4-d59f-462d-ad33-a85a5e33562b",
+      name: "Education",
+      type: "EXPENSE"
+    },
+    {
+      id: "c143130f-7d1e-4011-90a4-54766d4e308e",
+      name: "Income",
+      type: "INCOME"
+    }
+  ];
+  
+  // Eğer API'dan kategoriler geldiyse onları kullan, yoksa varsayılan kategorileri kullan
+  const categories = categoriesFromAPI && categoriesFromAPI.length > 0 ? categoriesFromAPI : defaultCategories;
   const [isChecked, setIsChecked] = useState(false);
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const handleChange = () => {
@@ -152,6 +200,11 @@ function AddTransactionForm() {
             autoComplete="off"
             placeholder="0.00"
             className={s.sum}
+            onKeyPress={(event) => {
+              if (!/[0-9.]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }}
           />
           {errors.amount && (
             <span className={s.comment_err}>{"Enter a number"}</span>

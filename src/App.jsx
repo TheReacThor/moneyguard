@@ -1,4 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
 
 import Statistics from "./components/Statistics/Statistics";
@@ -10,11 +12,17 @@ import ModalAddTransaction from "./components/ModalAddTransaction/ModalAddTransa
 import HomeTab from "./components/HomeTab/HomeTab";
 import PublicRoute from "./routes/PublicRoute";
 import PrivateRoute from "./routes/PrivateRoute";
+import { getTransactionsCategories } from "./redux/Statistics/operations";
 
 
 // Other imports will be added as they are implemented
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTransactionsCategories());
+  }, [dispatch]);
   return (
     <>
       <Routes>
@@ -30,7 +38,6 @@ function App() {
           {/* Buraya da login olmuş kullanıcının görmesi gereken sayfaları ekleyelim */}
           <Route path="/" element={<DashboardPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/home" element={<HomeTab />} />
           <Route path="/statistics" element={<Statistics />} />
         </Route>
 
