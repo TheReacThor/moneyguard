@@ -37,6 +37,6 @@ const slice = createSlice({
   },
 });
 
-export const { openAddModal, closeAddModal } = slice.actions;
+export const { openAddModal, closeAddModal, openEditModal, closeEditModal } = slice.actions;
 export const selectIsAddModalOpen = (state) => state.modals.isAddModalOpen;
 export const modalsReducer = slice.reducer;

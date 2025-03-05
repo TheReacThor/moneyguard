@@ -8,26 +8,32 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { editTransaction } from '../../redux/Transactions/operations';
 import { selectCategories } from '../../redux/Statistics/selectors';
-import { openEditModal, closeEditModal } from '../../redux/Modals/slice';
-import { selectTransactions } from '../../redux/Transactions/selectors';
+import { closeEditModal } from '../../redux/Modals/slice';
+import { selectTransactions, selectIsEditID } from '../../redux/Transactions/selectors';
 import { format } from 'date-fns';
 
 const EditTransactionForm = () => {
   const categories = useSelector(selectCategories);
   const transactions = useSelector(selectTransactions);
   const dispatch = useDispatch();
-  const IdForEdit = useSelector(openEditModal);
+  const IdForEdit = useSelector(selectIsEditID);
 
   const foundObject = transactions.find((item) => item.id === IdForEdit);
 
   const [isChecked, setIsChecked] = useState(true);
   useEffect(() => {
-    if (foundObject.type === 'INCOME') {
-      setIsChecked(false);
-    } else if (foundObject.type === 'EXPENSE') {
-      setIsChecked(true);
+    if (foundObject) {
+      if (foundObject.type === 'INCOME') {
+        setIsChecked(false);
+      } else if (foundObject.type === 'EXPENSE') {
+        setIsChecked(true);
+      }
     }
-  }, [foundObject.type]);
+  }, [foundObject]);
+
+  if (!foundObject) {
+    return <div>Transaction not found</div>;
+  }
 
   const initialValues = {
     amount: Math.abs(foundObject.amount),
