@@ -1,0 +1,19 @@
+.title {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.incomeTitle {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 16px;
+  text-align: right;
+  color: var(--yellow);
+}
+.expenseTitle {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--white-600);
+}
