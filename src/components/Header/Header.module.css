@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  font-family: var(--font-family);
+  box-shadow: 0 4px 40px 0 rgba(0, 0, 0, 0.25),
+    inset 0 -3px 2px 0 rgba(0, 0, 0, 0.1);
+  background: linear-gradient(276deg, #2e1746 3.19%, #2e225f 100%);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-weight: 400;
+  font-size: 17px;
+  color: var(--white);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  margin-right: 1rem;
+  font-size: 16px;
+  color: var(--white);
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 12px;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--white-600);
+}

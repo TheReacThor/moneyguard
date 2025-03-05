@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.sidebar {
+  width: 30%;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Mobil görünüm */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .sidebar {
+    width: 100%;
+    min-width: auto;
+    margin-bottom: 20px;
+  }
+}
+
+/* Tablet görünüm */
+@media (min-width: 769px) and (max-width: 1279px) {
+  .container {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .sidebar {
+    width: 100%;
+    min-width: auto;
+    margin-bottom: 20px;
+  }
+}
+
+/* Masaüstü görünüm */
+@media (min-width: 1280px) {
+  .container {
+    gap: 40px;
+  }
+}
