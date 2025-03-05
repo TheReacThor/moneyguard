@@ -1,4 +1,8 @@
-@import url(./utils/variables.css);
+/* Modern Normalize */
+@import "modern-normalize/modern-normalize.css";
+
+/* Global CSS Variables */
+@import "./utils/variables.css";
 
 @font-face {
   font-family: "Poppins";

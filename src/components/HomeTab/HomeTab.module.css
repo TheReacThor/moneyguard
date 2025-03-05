@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  gap: 69px;
+  padding: 0 16px;
+}
+
+.sidebar {
+  width: 480px;
+  padding-top: 40px;
+}
