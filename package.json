@@ -17,6 +17,7 @@
     "clsx": "^2.1.1",
     "formik": "^2.4.6",
     "modern-normalize": "^3.0.1",
+    "moneyguard": "file:",
     "react": "^18.0.0",
     "react-chartjs-2": "^5.3.0",
     "react-datepicker": "^8.1.0",
