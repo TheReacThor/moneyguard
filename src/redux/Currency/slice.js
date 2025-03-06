@@ -7,16 +7,25 @@ const initialState = {
   isCurrencyError: null,
 };
 
-export const slice = createSlice({
+const currencySlice = createSlice({
   name: "currency",
   initialState,
-
-  extraReducers: (builder) =>
+  reducers: {},
+  extraReducers: (builder) => {
     builder
-      // getCurrency için extraReducers
-      .addCase(getCurrency.fulfilled, () => {})
-      .addCase(getCurrency.pending, () => {})
-      .addCase(getCurrency.rejected, () => {}),
+      .addCase(getCurrency.pending, (state) => {
+        state.isCurrencyLoading = true;
+        state.isCurrencyError = null;
+      })
+      .addCase(getCurrency.fulfilled, (state, { payload }) => {
+        state.isCurrencyLoading = false;
+        state.data = payload;
+      })
+      .addCase(getCurrency.rejected, (state, { payload }) => {
+        state.isCurrencyLoading = false;
+        state.isCurrencyError = payload;
+      });
+  },
 });
 
-export const currencyReducer = slice.reducer;
+export const currencyReducer = currencySlice.reducer;
