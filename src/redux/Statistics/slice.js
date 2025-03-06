@@ -32,7 +32,8 @@ const slice = createSlice({
       })
       // getTransactionsSummaryByPeriod için extraReducers
       .addCase(getTransactionsSummaryByPeriod.fulfilled, (state, action) => {
-        state.summary = action.payload;
+        // API'den gelen veriyi doğru şekilde işle
+        state.summary = action.payload.categoriesSummary || [];
         state.isStatisticsLoading = false;
         state.isStatisticsError = null;
       })

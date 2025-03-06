@@ -21,6 +21,7 @@ const slice = createSlice({
         state.transactions = payload;
       })
       .addCase(addTransactions.fulfilled, (state, { payload }) => {
+        // Eklenen işlemi listeye ekle
         state.transactions = [...state.transactions, payload];
       })
       .addCase(editTransactions.fulfilled, (state, { payload }) => {

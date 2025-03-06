@@ -1,7 +1,47 @@
-export function getFormattedTransactions(transactions, categories) {
-  return transactions
-    .map((transaction) => getFormattedTransaction(transaction, categories))
-    .toSorted((a, b) => b.date.localeCompare(a.date));
+export function getFormattedTransactions(transactions, categories, sortConfig = { key: 'date', direction: 'desc' }) {
+  const formattedTransactions = transactions
+    .map((transaction) => getFormattedTransaction(transaction, categories));
+  
+  // Sıralama işlemi
+  return sortTransactions(formattedTransactions, sortConfig);
+}
+
+// Sıralama fonksiyonu
+export function sortTransactions(transactions, sortConfig) {
+  return [...transactions].sort((a, b) => {
+    if (sortConfig.key === 'date') {
+      return sortConfig.direction === 'asc' 
+        ? a.date.localeCompare(b.date) 
+        : b.date.localeCompare(a.date);
+    } 
+    else if (sortConfig.key === 'type') {
+      return sortConfig.direction === 'asc' 
+        ? a.type.localeCompare(b.type) 
+        : b.type.localeCompare(a.type);
+    } 
+    else if (sortConfig.key === 'category') {
+      return sortConfig.direction === 'asc' 
+        ? a.category.localeCompare(b.category) 
+        : b.category.localeCompare(a.category);
+    } 
+    else if (sortConfig.key === 'comment') {
+      const aComment = a.comment || '';
+      const bComment = b.comment || '';
+      return sortConfig.direction === 'asc' 
+        ? aComment.localeCompare(bComment) 
+        : bComment.localeCompare(aComment);
+    } 
+    else if (sortConfig.key === 'sum') {
+      return sortConfig.direction === 'asc' 
+        ? a.sum - b.sum 
+        : b.sum - a.sum;
+    }
+    
+    // Varsayılan olarak tarihe göre sırala
+    return sortConfig.direction === 'asc' 
+      ? a.date.localeCompare(b.date) 
+      : b.date.localeCompare(a.date);
+  });
 }
 
 function getFormattedTransaction(transaction, categories) {

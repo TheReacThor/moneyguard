@@ -1,11 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { getTransactionSummary, getCategories } from "../../services/statistics-api";
+import { setToken } from "../../config/userTransactionApi";
 
 export const getTransactionsSummaryByPeriod = createAsyncThunk(
   "statistics/getTransactionsSummaryByPeriod",
   async (params, thunkAPI) => {
     try {
+      const token = thunkAPI.getState().auth.token;
+      if (!token) {
+        throw new Error("No token found");
+      }
+      setToken(token);
       const data = await getTransactionSummary(params);
       return data;
     } catch (error) {
@@ -19,6 +25,11 @@ export const getTransactionsCategories = createAsyncThunk(
   "statistics/getTransactionsCategories",
   async (_, thunkAPI) => {
     try {
+      const token = thunkAPI.getState().auth.token;
+      if (!token) {
+        throw new Error("No token found");
+      }
+      setToken(token);
       const data = await getCategories();
       return data;
     } catch (error) {

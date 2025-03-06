@@ -1,45 +1,122 @@
 .tableContainer {
-  background-color: #fff;
+  background-color: #1F1F27;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  overflow: hidden;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.tableTitle {
-  font-size: 18px;
-  font-weight: 600;
+.tableHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #2E2E3A;
+  border-radius: 8px;
   margin-bottom: 16px;
-  color: #333;
-}
-
-.statisticsTable {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.statisticsTable th,
-.statisticsTable td {
-  padding: 12px 16px;
-  text-align: left;
-  border-bottom: 1px solid #eee;
-}
-
-.statisticsTable th {
   font-weight: 600;
-  color: #555;
-  background-color: #f9f9f9;
+  color: #fff;
+  cursor: pointer;
 }
 
-.statisticsTable tr:last-child td {
+.categoryHeader, .sumHeader {
+  display: flex;
+  align-items: center;
+  user-select: none;
+  transition: color 0.2s;
+}
+
+.categoryHeader:hover, .sumHeader:hover {
+  color: #24CCA7;
+}
+
+.categoryHeader {
+  flex: 1;
+}
+
+.sumHeader {
+  width: 120px;
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.sortIcon {
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.tableBody {
+  margin-bottom: 20px;
+}
+
+.tableRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid #2E2E3A;
+}
+
+.tableRow:last-child {
   border-bottom: none;
+}
+
+.categoryCell {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+}
+
+.colorIndicator {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.sumCell {
+  width: 120px;
+  text-align: right;
+  color: #fff;
+}
+
+.tableSummary {
+  margin-top: 20px;
+  border-top: 1px solid #2E2E3A;
+  padding-top: 16px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 20px;
+  font-weight: 600;
+}
+
+.summaryLabel {
+  color: #fff;
+}
+
+.summaryValue {
+  color: #FF6596;
+}
+
+.summaryValue.income {
+  color: #24CCA7;
 }
 
 .emptyMessage {
   text-align: center;
   color: #888;
   font-style: italic;
-  padding: 20px 0;
+  padding: 40px 0;
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
 }
 
 @media (max-width: 768px) {
@@ -47,8 +124,11 @@
     padding: 15px;
   }
   
-  .statisticsTable th,
-  .statisticsTable td {
+  .tableHeader, .tableRow, .summaryRow {
     padding: 10px;
+  }
+  
+  .sumCell, .sumHeader {
+    width: 100px;
   }
 }

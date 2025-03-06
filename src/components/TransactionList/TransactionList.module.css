@@ -21,6 +21,24 @@
   color: var(--white-color);
   font-size: 16px;
   font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  transition: color 0.2s;
+}
+
+.headerCell:hover {
+  color: #ffc727;
+}
+
+.headerCell:last-child {
+  cursor: default;
+}
+
+.sortIcon {
+  margin-left: 5px;
+  font-size: 14px;
 }
 
 .headerCell:nth-child(1) {
