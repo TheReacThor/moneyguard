@@ -74,57 +74,64 @@
 .currency_wrapper {
   max-width: 320px;
   color: var(--white-color);
-  background-color: var(--table-background-color);
-  margin: 32px auto 0;
-  grid-area: currency;
+  background-color: rgba(74, 86, 226, 0.1);
+  margin-top: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0;
 }
 
 .currency_table {
   margin-bottom: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .currency_table_head {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 48px;
-  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   background-color: rgba(255, 255, 255, 0.2);
+  padding: 12px 20px;
+}
+
+.currency_item {
   font-weight: 600;
   font-size: 16px;
-  margin-bottom: 8px;
+  text-align: center;
 }
 
 .table_body {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  padding: 12px 20px;
 }
 
 .currency_tr {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 55px;
-  font-size: 16px;
-  margin-left: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 12px;
 }
 
-.currency_wrapper img {
-  width: 320px;
+.currency_tr:last-child {
+  margin-bottom: 0;
+}
+
+.currency {
+  font-size: 16px;
+  text-align: center;
 }
 
 .diagram {
   position: relative;
+  margin-top: 20px;
+}
+
+.diagram img {
+  width: 100%;
+  height: auto;
 }
 
 .lowerNumber {
   position: absolute;
   top: 10px;
   left: 40px;
-  color: var(--error-color);
+  color: #ff868d;
   font-size: 12px;
 }
 
@@ -132,69 +139,26 @@
   position: absolute;
   top: -18px;
   right: 92px;
-  color: var(--error-color);
+  color: #ff868d;
   font-size: 12px;
 }
 
 @media screen and (min-width: 768px) {
   .currency_wrapper {
-    border-radius: 0 0 8px 8px;
-    margin-top: 0;
     max-width: 336px;
-  }
-
-  .currency_table_head {
-    justify-content: center;
-    gap: 35px;
-  }
-
-  .currency_item:nth-child(3) {
-    margin-left: 15px;
-  }
-
-  .currency_tr {
-    gap: 65px;
-  }
-
-  .currency_wrapper img {
-    width: 336px;
-    height: 88px;
+    margin-top: 0;
+    border-radius: 0 0 8px 8px;
   }
 }
 
 @media screen and (min-width: 1280px) {
-  .currency_wrapper,
-  .currency_table_head {
+  .currency_wrapper {
+    max-width: 480px;
+    margin-top: 32px;
     border-radius: 8px;
   }
 
-  .currency_wrapper {
-    margin-top: 35px;
-    max-width: 480px;
-    height: 340px;
-  }
-
-  .currency_table {
-    max-width: 480px;
-  }
-
-  .currency_table_head {
-    height: 56px;
-    margin-bottom: 24px;
-    padding-left: 95px;
-    justify-content: flex-start;
-  }
-
-  .table_body {
-    margin-bottom: 15px;
-  }
-
-  .currency_tr {
-    padding: 0 20px;
-    margin: 0;
-  }
-
-  .currency_wrapper img {
+  .diagram img {
     width: 480px;
     height: 167px;
   }

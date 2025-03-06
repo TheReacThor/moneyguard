@@ -22,33 +22,30 @@ const Currency = () => {
   return (
     <div className={styles.currency_wrapper}>
       <div className={styles.currency_table}>
-        <ul className={styles.currency_table_head}>
-          <li className={styles.currency_item}>Currency</li>
-          <li className={styles.currency_item}>Purchase</li>
-          <li className={styles.currency_item}>Sale</li>
-        </ul>
-        <ul className={styles.table_body}>
-          <li className={styles.currency_tr}>
+        <div className={styles.currency_table_head}>
+          <p className={styles.currency_item}>Currency</p>
+          <p className={styles.currency_item}>Purchase</p>
+          <p className={styles.currency_item}>Sale</p>
+        </div>
+        <div className={styles.table_body}>
+          <div className={styles.currency_tr}>
             <p className={styles.currency}>USD</p>
             <p className={styles.currency}>{buyUSD}</p>
             <p className={styles.currency}>{sellUSD}</p>
-          </li>
-          <li className={styles.currency_tr}>
+          </div>
+          <div className={styles.currency_tr}>
             <p className={styles.currency}>EUR</p>
             <p className={styles.currency}>{buyEUR}</p>
             <p className={styles.currency}>{sellEUR}</p>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
-
-      {isDesktop ? (
+      {isDesktop && (
         <div className={styles.diagram}>
           <p className={styles.lowerNumber}>{buyUSD}</p>
           <p className={styles.higherNumber}>{buyEUR}</p>
           <img src="/img/currency.png" alt="Currency chart" />
         </div>
-      ) : (
-        <img src="/img/currency.png" alt="Currency chart" />
       )}
     </div>
   );
