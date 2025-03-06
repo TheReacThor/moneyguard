@@ -30,6 +30,8 @@ const slice = createSlice({
         if (index !== -1) {
           state.transactions[index] = payload;
         }
+        state.isTransLoading = false;
+        state.isTransError = null;
       })
       .addCase(deleteTransactions.fulfilled, (state, { payload }) => {
         state.transactions = state.transactions.filter(

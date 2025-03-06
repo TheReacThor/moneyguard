@@ -57,60 +57,82 @@ function EditTransactionForm() {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      amount: amountDefaultValue,
+      transactionDate: startDateDefaultValue,
+      comment: commentDefaultValue,
+    },
   });
 
   const onSubmit = (data) => {
-    if (foundObject.type === "INCOME") {
-      data.categoryId = foundObject.categoryId;
-      data.amount = Math.abs(data.amount);
-    } else {
-      data.categoryId = foundObject.categoryId;
-      data.amount = Math.abs(data.amount) * -1;
+    const editedTransaction = {
+      categoryId: foundObject.categoryId,
+      type: foundObject.type,
+      amount:
+        foundObject.type === "INCOME"
+          ? Math.abs(data.amount)
+          : Math.abs(data.amount) * -1,
+      transactionDate: format(new Date(data.transactionDate), "yyyy-MM-dd"),
+      comment: data.comment,
+    };
+
+    try {
+      dispatch(
+        editTransactions({
+          id: IdForEdit,
+          transaction: editedTransaction,
+        })
+      )
+        .unwrap()
+        .then(() => {
+          dispatch(closeEditModal());
+        });
+    } catch (error) {
+      // Hata durumunda sessizce devam et
     }
-
-    data.type = foundObject.type;
-    const originalDate = new Date(data.transactionDate);
-    data.transactionDate = format(originalDate, "yyyy-MM-dd");
-
-    dispatch(editTransactions({ id: IdForEdit, transaction: data }));
-    dispatch(closeEditModal());
   };
 
   return (
     <>
-      <div className={styles.type}>
-        <div
-          className={clsx(styles.type_text, !isChecked && styles.income_active)}
-        >
-          Income
-        </div>
-        <div className={styles.type_svg}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="10"
-            height="22"
-            viewBox="0 0 10 22"
-            fill="none"
-          >
-            <path
-              d="M8.80108 1.09786L1.19895 20.9021"
-              stroke="#E0E0E0"
-              strokeWidth="2"
-            />
-          </svg>
-        </div>
-        <div
-          className={clsx(styles.type_text, isChecked && styles.expense_active)}
-        >
-          Expense
-        </div>
-      </div>
-
-      {isChecked && (
-        <div className={styles.category_display}>{categoryName}</div>
-      )}
-
       <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.type}>
+          <div
+            className={clsx(
+              styles.type_text,
+              !isChecked && styles.income_active
+            )}
+          >
+            Income
+          </div>
+          <div className={styles.type_svg}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="10"
+              height="22"
+              viewBox="0 0 10 22"
+              fill="none"
+            >
+              <path
+                d="M8.80108 1.09786L1.19895 20.9021"
+                stroke="#E0E0E0"
+                strokeWidth="2"
+              />
+            </svg>
+          </div>
+          <div
+            className={clsx(
+              styles.type_text,
+              isChecked && styles.expense_active
+            )}
+          >
+            Expense
+          </div>
+        </div>
+
+        {isChecked && (
+          <div className={styles.category_display}>{categoryName}</div>
+        )}
+
         <div className={styles.sum_data_wrap}>
           <div className={styles.sum_wrap}>
             <input
@@ -118,7 +140,6 @@ function EditTransactionForm() {
               type="number"
               autoComplete="off"
               placeholder="0.00"
-              defaultValue={amountDefaultValue}
               className={styles.sum}
             />
             {errors.amount && (
@@ -132,9 +153,10 @@ function EditTransactionForm() {
             <Controller
               name="transactionDate"
               control={control}
+              defaultValue={startDateDefaultValue}
               render={({ field }) => (
                 <DatePicker
-                  selected={field.value || startDateDefaultValue}
+                  selected={field.value}
                   onChange={(date) => {
                     field.onChange(date);
                     setIsDatePickerOpen(false);
@@ -176,7 +198,6 @@ function EditTransactionForm() {
             type="text"
             className={styles.input}
             placeholder="Comment"
-            defaultValue={commentDefaultValue}
             autoComplete="off"
           />
           {errors.comment && (
@@ -184,7 +205,14 @@ function EditTransactionForm() {
           )}
         </div>
         <div className={styles.btn_wrap}>
-          <button className={clsx(styles.btn, styles.btn_add)} type="submit">
+          <button
+            className={clsx(styles.btn, styles.btn_add)}
+            type="submit"
+            onClick={(e) => {
+              e.preventDefault();
+              handleSubmit(onSubmit)(e);
+            }}
+          >
             SAVE
           </button>
           <button
