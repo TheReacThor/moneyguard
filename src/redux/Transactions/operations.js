@@ -72,15 +72,24 @@ export const editTransactions = createAsyncThunk(
         throw new Error("No token found");
       }
       setToken(token);
-      const { data } = await userTransactionsApi.patch(
+
+      const response = await userTransactionsApi.patch(
         `/api/transactions/${id}`,
         transaction
       );
+
+      if (!response.data) {
+        throw new Error("No data received from API");
+      }
+
       await thunkApi.dispatch(getBalanceThunk());
       await thunkApi.dispatch(getTransactions());
-      return data;
+
+      return response.data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return thunkApi.rejectWithValue(
+        error.response?.data?.message || error.message || "An error occurred"
+      );
     }
   }
 );
