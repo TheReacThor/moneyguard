@@ -8,11 +8,14 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './redux/store'; // store ve persistor'u import et
 import { BrowserRouter } from 'react-router-dom';
 
+// GitHub Pages için basename ayarı
+const basename = window.location.hostname.includes('github.io') ? '/moneyguard' : '/';
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter basename="/moneyguard">
+        <BrowserRouter basename={basename}>
           <App />
         </BrowserRouter>
       </PersistGate>
