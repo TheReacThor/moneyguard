@@ -1,95 +1,56 @@
 .tableContainer {
-  background-color: rgba(76, 56, 128, 0.4);
-  border-radius: 20px;
-  overflow: hidden;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  background: rgba(74, 86, 226, 0.1);
+  border-radius: 8px;
+  margin-top: 46px;
+  padding: 0 20px;
 }
 
 .tableHeader {
-  display: flex;
-  background-color: rgba(76, 56, 128, 0.6);
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr 2fr 120px 120px;
+  gap: 20px;
   padding: 15px 20px;
-  font-weight: 600;
-  color: var(--white);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
 .headerCell {
-  flex: 1;
-  padding: 0 10px;
+  color: var(--white-color);
+  font-size: 16px;
+  font-weight: 600;
 }
 
-.headerCell:first-child {
-  flex: 0.8;
+.headerCell:nth-child(1) {
+  text-align: left;
+  padding-left: 20px;
 }
 
 .headerCell:nth-child(2) {
-  flex: 0.5;
   text-align: center;
+}
+
+.headerCell:nth-child(3) {
+  text-align: left;
+  padding-left: 20px;
+}
+
+.headerCell:nth-child(4) {
+  text-align: left;
+  padding-left: 20px;
 }
 
 .headerCell:nth-child(5) {
   text-align: right;
-}
-
-.headerCell:last-child {
-  flex: 0.5;
-  text-align: right;
+  padding-right: 20px;
 }
 
 .transactionList {
-  list-style: none;
   padding: 0;
   margin: 0;
-  background-color: rgba(76, 56, 128, 0.4);
-}
-
-.transactionList {
   list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.emptyTransactionsContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-  text-align: center;
-}
-
-.noTransactions {
-  text-align: center;
-  color: var(--white);
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.addFirstTransaction {
-  text-align: center;
-  color: var(--white);
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-.addTransactionButton {
-  background: linear-gradient(to right, #FFC727, #FF7A85);
-  color: var(--white);
-  border: none;
-  border-radius: 20px;
-  padding: 12px 24px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.addTransactionButton:hover {
-  opacity: 0.9;
-  transform: scale(1.02);
 }
 
 .loadingContainer {
@@ -99,34 +60,82 @@
   min-height: 200px;
 }
 
-/* Mobil görünüm */
-@media (max-width: 768px) {
-  .tableContainer {
-    border-radius: 0;
-    background-color: transparent;
-    box-shadow: none;
-  }
-  
-  .tableHeader {
-    display: none;
-  }
-  
-  .transactionList {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 10px;
-    background-color: transparent;
-  }
-  
-  .emptyTransactionsContainer {
-    padding: 60px 20px;
-  }
+.emptyTransactionsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  text-align: center;
+  color: var(--white-color);
+  background: rgba(74, 86, 226, 0.1);
+  border-radius: 8px;
+  padding: 40px;
+  margin-top: 46px;
 }
 
-/* Masaüstü görünüm */
-@media (min-width: 769px) {
-  .transactionList {
-    border-radius: 0 0 8px 8px;
+.noTransactions {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.addFirstTransaction {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.addTransactionButton {
+  background: linear-gradient(
+    97deg,
+    #ffc727 -16.42%,
+    #9e40ba 97.04%,
+    #7000ff 150.71%
+  );
+  border: none;
+  border-radius: 20px;
+  color: var(--white-color);
+  font-size: 18px;
+  padding: 13px 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.addTransactionButton:hover {
+  transform: scale(1.05);
+  background: linear-gradient(
+    97deg,
+    #7000ff -16.42%,
+    #9e40ba 97.04%,
+    #ffc727 150.71%
+  );
+}
+
+@media screen and (max-width: 768px) {
+  .tableContainer {
+    margin-top: 32px;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .tableHeader {
+    grid-template-columns: 1fr 0.5fr 1fr 1.5fr 1fr 0.5fr;
+    padding: 12px 15px;
+    gap: 10px;
+  }
+
+  .headerCell {
+    font-size: 14px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .tableContainer {
+    margin-left: 69px;
+    max-width: calc(100% - 69px);
+  }
+
+  .tableHeader {
+    padding: 15px 30px;
+    gap: 30px;
   }
 }

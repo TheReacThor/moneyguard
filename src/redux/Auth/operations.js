@@ -1,18 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
-  getBalance,
-  register,
-  login,
-  logout,
-  refreshUser,
-} from "../../services/auth-api";
+  userTransactionsApi,
+  setToken,
+  removeToken,
+} from "../../config/userTransactionApi";
 
 export const registerThunk = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     // -Kullanıcı kaydı için gerekli fonksiyon...
     try {
-      const data = await register(credentials);
+      const { data } = await userTransactionsApi.post(
+        "/api/auth/sign-up",
+        credentials
+      );
+      setToken(data.token);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -25,7 +27,11 @@ export const loginThunk = createAsyncThunk(
   async (credentials, thunkAPI) => {
     // -Kullanıcı girişi için gerekli fonksiyon...
     try {
-      const data = await login(credentials);
+      const { data } = await userTransactionsApi.post(
+        "/api/auth/sign-in",
+        credentials
+      );
+      setToken(data.token);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -40,15 +46,15 @@ export const logoutThunk = createAsyncThunk(
       console.log("logoutThunk çalışıyor...");
 
       // Çıkış API isteği gönderiliyor
-      const response = await logout();
+      const { data } = await userTransactionsApi.delete("/api/auth/sign-out");
 
-      console.log("Çıkış başarılı:", response);
+      console.log("Çıkış başarılı:", data);
 
       // LocalStorage'dan token siliniyor
-      localStorage.removeItem("token");
+      removeToken();
 
       // Başarılıysa veriyi döndür
-      return response;
+      return data;
     } catch (error) {
       console.error("logoutThunk hata:", error);
 
@@ -63,9 +69,15 @@ export const logoutThunk = createAsyncThunk(
 export const refreshThunk = createAsyncThunk(
   "auth/refresh",
   async (_, thunkAPI) => {
-    // -Kullanıcıların verilerini (balance) güncellemek için gerekli fonksiyon...
+    const savedToken = thunkAPI.getState().auth.token;
+    if (savedToken) {
+      setToken(savedToken);
+    } else {
+      return thunkAPI.rejectWithValue("Token doesn't exist");
+    }
+
     try {
-      const data = await refreshUser();
+      const { data } = await userTransactionsApi.get("/api/users/current");
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -74,12 +86,12 @@ export const refreshThunk = createAsyncThunk(
 );
 
 export const getBalanceThunk = createAsyncThunk(
-  "auth/getBalance",
+  "getBalannce",
   async (_, thunkAPI) => {
     // - Kullanıcıların balance'ını almak için gerekli fonksiyon...
     try {
-      const data = await getBalance();
-      return data;
+      const { data } = await userTransactionsApi.get("/api/users/current");
+      return data.balance;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

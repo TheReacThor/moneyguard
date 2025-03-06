@@ -1,23 +1,25 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { openAddModal } from '../../redux/Modals/slice';
-import TransactionItem from '../TransactionItem/TransactionItem';
-import styles from './TransactionList.module.css';
-import { ThreeDots } from 'react-loader-spinner';
-import { selectTransactions, selectTransLoading } from '../../redux/Transactions/selectors';
-import { setToken } from "../../services/auth-api";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { openAddModal } from "../../redux/Modals/slice";
+import TransactionItem from "../TransactionItem/TransactionItem";
+import styles from "./TransactionList.module.css";
+import { ThreeDots } from "react-loader-spinner";
+import {
+  selectTransactions,
+  selectTransLoading,
+  selectTransError,
+} from "../../redux/Transactions/selectors";
+import { selectCategories } from "../../redux/Statistics/selectors";
+import {
+  getFormattedTransactions,
+  getHeadTransaction,
+} from "../../helpers/transactionsFormatter";
 
 const TransactionList = () => {
-  const token = useSelector((state) => state.auth.token);
-
-  useEffect(() => {
-    if (token) {
-      setToken(token);
-    }
-  }, [token]);
-  // Using selectors to access state
   const transactions = useSelector(selectTransactions);
   const isLoading = useSelector(selectTransLoading);
+  const categories = useSelector(selectCategories);
+  const dispatch = useDispatch();
 
   if (isLoading) {
     return (
@@ -36,14 +38,14 @@ const TransactionList = () => {
     );
   }
 
-  const dispatch = useDispatch();
-
   if (!transactions || transactions.length === 0) {
     return (
       <div className={styles.emptyTransactionsContainer}>
         <p className={styles.noTransactions}>No transactions available yet.</p>
-        <p className={styles.addFirstTransaction}>Let's add your first transaction:</p>
-        <button 
+        <p className={styles.addFirstTransaction}>
+          Let's add your first transaction:
+        </p>
+        <button
           className={styles.addTransactionButton}
           onClick={() => dispatch(openAddModal())}
         >
@@ -64,9 +66,11 @@ const TransactionList = () => {
         <div className={styles.headerCell}></div>
       </div>
       <ul className={styles.transactionList}>
-        {transactions.map((transaction) => (
-          <TransactionItem key={transaction.id} transaction={transaction} />
-        ))}
+        {getFormattedTransactions(transactions, categories).map(
+          (transaction) => (
+            <TransactionItem key={transaction.id} transaction={transaction} />
+          )
+        )}
       </ul>
     </div>
   );

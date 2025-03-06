@@ -4,7 +4,7 @@ import { logoutThunk } from "/src/redux/Auth/operations";
 import styles from "./LogOutModal.module.css";
 
 import LogOutModalSvg from "./LogOutModalSvg";
-import { setToken } from "../../services/auth-api";
+import { setToken } from "../../config/userTransactionApi";
 
 // eslint-disable-next-line react/prop-types
 const LogOutModal = ({ onClose }) => {
