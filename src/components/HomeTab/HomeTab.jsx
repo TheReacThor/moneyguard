@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import TransactionList from "../TransactionList/TransactionList"; // Sonra oluşturulacak
 import Balance from "../Balance/Balance"; // Sonra oluşturulacak
 import ButtonAddTransactions from "../ButtonAddTransactions/ButtonAddTransactions";
-import { fetchTransactions } from "../../redux/Transactions/operations"; // Task 13'ten
+import { getTransactions } from "../../redux/Transactions/operations"; // Task 13'ten
 import Navigation from "../Navigation/Navigation";
 import Currency from "../Currency/Currency";
 import useMedia from "../../hooks/useMedia";
@@ -14,7 +14,7 @@ const HomeTab = () => {
   const { isDesktop } = useMedia();
 
   useEffect(() => {
-    dispatch(fetchTransactions());
+    dispatch(getTransactions());
   }, [dispatch]);
 
   return (

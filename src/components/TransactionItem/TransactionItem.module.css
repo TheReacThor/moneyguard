@@ -1,187 +1,141 @@
 .transactionItem {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr 2fr 120px 120px;
+  gap: 20px;
   padding: 15px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  transition: background-color 0.2s ease;
-  color: var(--white);
+  color: var(--white-color);
+  font-size: 16px;
+  align-items: center;
 }
 
-.transactionItem:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.transactionItem > div {
-  flex: 1;
-  padding: 0 10px;
+.transactionItem:last-child {
+  border-bottom: none;
 }
 
 .transactionDate {
-  flex: 0.8 !important;
-  font-size: 14px;
-  color: var(--white-600);
+  font-size: 16px;
+  color: var(--white-color);
+  text-align: left;
+  padding-left: 20px;
 }
 
 .transactionType {
-  flex: 0.5 !important;
-  font-size: 16px;
-  text-align: center;
   font-weight: 600;
-}
-
-.expense .transactionType {
-  color: #ff6b6b;
+  text-align: center;
+  width: 100%;
 }
 
 .income .transactionType {
-  color: #FFB627;
+  color: var(--yellow-color);
+}
+
+.expense .transactionType {
+  color: var(--red-color);
 }
 
 .transactionCategory {
-  font-weight: 500;
-  color: var(--white);
+  text-transform: capitalize;
+  color: var(--white-color);
+  text-align: left;
+  padding-left: 20px;
 }
 
 .transactionComment {
+  color: var(--white-color);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: var(--white-600);
+  text-align: left;
+  padding-left: 20px;
 }
 
 .transactionAmount {
   text-align: right;
-  font-weight: bold;
-}
-
-.expense .transactionAmount {
-  color: #ff6b6b;
+  font-weight: 600;
+  font-size: 16px;
+  padding-right: 20px;
 }
 
 .income .transactionAmount {
-  color: #FFB627;
+  color: var(--yellow-color);
+}
+
+.expense .transactionAmount {
+  color: var(--red-color);
 }
 
 .transactionActions {
-  flex: 0.5 !important;
   display: flex;
   gap: 8px;
   justify-content: flex-end;
-}
-
-.editButton,
-.deleteButton {
-  cursor: pointer;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
 }
 
 .editButton {
-  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
   border: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
+  padding: 4px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+  width: 24px;
+  height: 24px;
 }
 
 .editButton:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--white-color);
+  transform: scale(1.1);
 }
 
 .deleteButton {
-  background: linear-gradient(to right, #FFC727, #FF7A85);
-  color: var(--white);
+  background: linear-gradient(to right, #ffc727, #ff7a85);
+  color: var(--white-color);
   border: none;
   border-radius: 20px;
   padding: 6px 16px;
-  font-size: 12px;
-  font-weight: 600;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 70px;
 }
 
 .deleteButton:hover {
   opacity: 0.9;
+  transform: scale(1.05);
 }
 
-/* Mobil görünüm */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .transactionItem {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px;
-    border-radius: 20px;
-    background-color: rgba(76, 56, 128, 0.4);
-    border: none;
-    margin-bottom: 10px;
-    position: relative;
-  }
-
-  .transactionItem > div {
-    padding: 5px 0;
-    width: 100%;
-  }
-
-  .transactionDate {
-    font-size: 12px;
-    color: var(--white-400);
-  }
-
-  .transactionType {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    font-size: 20px;
-    font-weight: 700;
-  }
-
-  .transactionCategory {
-    font-size: 16px;
-    margin-top: 5px;
-    font-weight: 600;
-  }
-
-  .transactionComment {
-    color: var(--white-600);
-    margin-bottom: 10px;
+    grid-template-columns: 1fr 80px 1fr 1.5fr 100px 100px;
+    padding: 12px 15px;
+    gap: 10px;
     font-size: 14px;
   }
 
+  .transactionDate,
   .transactionAmount {
-    font-size: 18px;
-    text-align: left;
-    margin-bottom: 10px;
-    font-weight: 700;
+    font-size: 14px;
   }
 
-  .transactionActions {
-    width: 100%;
-    justify-content: space-between;
-    margin-top: 5px;
+  .transactionDate,
+  .transactionCategory,
+  .transactionComment {
+    padding-left: 10px;
   }
 
-  .deleteButton {
-    padding: 8px 20px;
+  .transactionAmount {
+    padding-right: 10px;
   }
-  
-  .transactionItem::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 5px;
-    border-radius: 5px 0 0 5px;
-  }
-  
-  .expense::before {
-    background-color: #ff6b6b;
-  }
-  
-  .income::before {
-    background-color: #FFB627;
+}
+
+@media screen and (min-width: 1280px) {
+  .transactionItem {
+    padding: 15px 30px;
+    gap: 30px;
   }
 }

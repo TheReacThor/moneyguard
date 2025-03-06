@@ -1,75 +1,86 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
-import {
-  getAllTransactions,
-  addTransaction,
-  updateTransaction,
-  deleteTransaction,
-  getTransactionsByCategory,
-} from "../../services/transactions-api";
+import { userTransactionsApi, setToken } from "../../config/userTransactionApi";
+import { getBalanceThunk } from "../Auth/operations";
 
 // Tüm işlemleri getirmek için thunk
-export const fetchTransactions = createAsyncThunk(
-  "transactions/fetchAll",
-  async (_, thunkAPI) => {
+export const getTransactions = createAsyncThunk(
+  "transactions/all",
+  async (_, thunkApi) => {
     try {
-      const data = await getAllTransactions();
+      const token = thunkApi.getState().auth.token;
+      if (!token) {
+        throw new Error("No token found");
+      }
+      setToken(token);
+      const { data } = await userTransactionsApi.get("/api/transactions");
       return data;
     } catch (error) {
-      toast.error(
-        error.response.data.message || "Failed to fetch transactions"
-      );
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkApi.rejectWithValue(error.message);
     }
   }
 );
 
 // İşlem eklemek için thunk
 export const addTransactions = createAsyncThunk(
-  "transactions/addTransaction",
-  async (transactionData, thunkAPI) => {
+  "transactions/add",
+  async (transaction, thunkApi) => {
     try {
-      // API çağrısı burada yapılacak
-      console.log("Transaction data:", transactionData);
-      toast.success("Transaction added successfully");
-      return transactionData;
+      const token = thunkApi.getState().auth.token;
+      if (!token) {
+        throw new Error("No token found");
+      }
+      setToken(token);
+      const { data } = await userTransactionsApi.post(
+        "/api/transactions",
+        transaction
+      );
+      await thunkApi.dispatch(getBalanceThunk());
+      return data;
     } catch (error) {
-      toast.error(error.message || "Failed to add transaction");
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkApi.rejectWithValue(error.message);
     }
   }
 );
 
 // İşlem silmek için thunk
-export const removeTransaction = createAsyncThunk(
-  "transactions/deleteTransaction",
-  async (transactionId, thunkAPI) => {
+export const deleteTransactions = createAsyncThunk(
+  "transactions/delete",
+  async (id, thunkApi) => {
     try {
-      const data = await deleteTransaction(transactionId);
-      toast.success("Transaction deleted successfully");
-      return data;
+      const token = thunkApi.getState().auth.token;
+      if (!token) {
+        throw new Error("No token found");
+      }
+      setToken(token);
+      await userTransactionsApi.delete(`/api/transactions/${id}`);
+      await thunkApi.dispatch(getBalanceThunk());
+      await thunkApi.dispatch(getTransactions());
+      return id;
     } catch (error) {
-      toast.error(
-        error.response.data.message || "Failed to delete transaction"
-      );
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkApi.rejectWithValue(error.message);
     }
   }
 );
 
 // İşlem güncellemek için thunk
-export const editTransaction = createAsyncThunk(
-  "transactions/updateTransaction",
-  async ({ transactionId, transactionData }, thunkAPI) => {
+export const editTransactions = createAsyncThunk(
+  "transactions/edit",
+  async ({ id, transaction }, thunkApi) => {
     try {
-      const data = await updateTransaction(transactionId, transactionData);
-      toast.success("Transaction updated successfully");
+      const token = thunkApi.getState().auth.token;
+      if (!token) {
+        throw new Error("No token found");
+      }
+      setToken(token);
+      const { data } = await userTransactionsApi.patch(
+        `/api/transactions/${id}`,
+        transaction
+      );
+      await thunkApi.dispatch(getBalanceThunk());
+      await thunkApi.dispatch(getTransactions());
       return data;
     } catch (error) {
-      toast.error(
-        error.response.data.message || "Failed to update transaction"
-      );
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkApi.rejectWithValue(error.message);
     }
   }
 );
@@ -77,13 +88,19 @@ export const editTransaction = createAsyncThunk(
 // Kategoriye göre işlem getirmek için
 export const fetchTransactionsByCategory = createAsyncThunk(
   "transactions/fetchByCategory",
-  async (category, thunkAPI) => {
+  async (category, thunkApi) => {
     try {
-      const data = await getTransactionsByCategory(category);
+      const token = thunkApi.getState().auth.token;
+      if (!token) {
+        throw new Error("No token found");
+      }
+      setToken(token);
+      const { data } = await userTransactionsApi.get(
+        `/api/transactions?category=${category}`
+      );
       return data;
     } catch (error) {
-      toast.error(error.response.data.message || "Failed to fetch transaction");
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkApi.rejectWithValue(error.message);
     }
   }
 );

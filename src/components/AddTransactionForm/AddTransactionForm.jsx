@@ -19,53 +19,56 @@ import CustomDropIndicator from "../CustomDropIndicator/CustomDropIndicator";
 function AddTransactionForm() {
   // API'dan gelen kategoriler
   const categoriesFromAPI = useSelector(selectCategories);
-  
+
   // Eğer API'dan kategoriler gelmezse, varsayılan kategorileri kullan
   const defaultCategories = [
     {
       id: "c9d9e447-1b83-4238-8712-edc77b18b739",
       name: "Main expenses",
-      type: "EXPENSE"
+      type: "EXPENSE",
     },
     {
       id: "27eb4b75-9a42-4991-a802-4aefe21ac3ce",
       name: "Products",
-      type: "EXPENSE"
+      type: "EXPENSE",
     },
     {
       id: "3caa7ba0-79c0-40b9-ae1f-de1af1f6e386",
       name: "Car",
-      type: "EXPENSE"
+      type: "EXPENSE",
     },
     {
       id: "bbdd58b8-e804-4ab9-bf4f-695da5ef64f4",
       name: "Self care",
-      type: "EXPENSE"
+      type: "EXPENSE",
     },
     {
       id: "76cc875a-3b43-4eae-8fdb-f76633821a34",
       name: "Child care",
-      type: "EXPENSE"
+      type: "EXPENSE",
     },
     {
       id: "128673b5-2f9a-46ae-a428-ec48cf1effa1",
       name: "Household products",
-      type: "EXPENSE"
+      type: "EXPENSE",
     },
     {
       id: "1272fcc4-d59f-462d-ad33-a85a5e33562b",
       name: "Education",
-      type: "EXPENSE"
+      type: "EXPENSE",
     },
     {
       id: "c143130f-7d1e-4011-90a4-54766d4e308e",
       name: "Income",
-      type: "INCOME"
-    }
+      type: "INCOME",
+    },
   ];
-  
+
   // Eğer API'dan kategoriler geldiyse onları kullan, yoksa varsayılan kategorileri kullan
-  const categories = categoriesFromAPI && categoriesFromAPI.length > 0 ? categoriesFromAPI : defaultCategories;
+  const categories =
+    categoriesFromAPI && categoriesFromAPI.length > 0
+      ? categoriesFromAPI
+      : defaultCategories;
   const [isChecked, setIsChecked] = useState(false);
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const handleChange = () => {
@@ -85,17 +88,13 @@ function AddTransactionForm() {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const currentDate = new Date();
-  const formattedDate = format(
-    currentDate,
-    "EEE MMM dd yyyy HH:mm:ss 'GMT'XXX (zzz)"
-  );
 
   const schema = yup.object().shape({
     amount: yup.number().required("Number invalid value"),
     transactionDate: yup
       .date()
       .required("Date is required")
-      .default(() => new Date(formattedDate)),
+      .default(() => currentDate),
     switch: yup.boolean(),
     category: yup.string(),
     comment: yup.string().required(),
@@ -112,26 +111,39 @@ function AddTransactionForm() {
 
   const onSubmit = (data) => {
     if (!isChecked) {
-      const categoryId = categories.filter((el) => el.name === "Income");
-      data.categoryId = categoryId[0].id;
+      // Income işlemi
+      const incomeCategory = categories.find((el) => el.type === "INCOME");
+      if (!incomeCategory) {
+        console.error("Income category not found");
+        return;
+      }
+      data.categoryId = incomeCategory.id;
       data.type = "INCOME";
       data.amount = Math.abs(data.amount);
-    } else if (selectedOption) {
-      data.categoryId = selectedOption.value;
-      data.type = "EXPENSE";
-      data.amount = Math.abs(data.amount) * -1;
-    } else if (!selectedOption) {
-      const categoryId = categories.filter((el) => el.name === "Main expenses");
-      data.categoryId = categoryId[0].id;
+    } else {
+      // Expense işlemi
+      if (selectedOption) {
+        data.categoryId = selectedOption.value;
+      } else {
+        const defaultExpenseCategory = categories.find(
+          (el) => el.name === "Main expenses"
+        );
+        if (!defaultExpenseCategory) {
+          console.error("Default expense category not found");
+          return;
+        }
+        data.categoryId = defaultExpenseCategory.id;
+      }
       data.type = "EXPENSE";
       data.amount = Math.abs(data.amount) * -1;
     }
 
-    const originalDate = new Date(data.transactionDate);
-    const formattedDate = format(originalDate, "yyyy-MM-dd");
-    data.transactionDate = formattedDate;
+    // Format date properly
+    const date = new Date(data.transactionDate);
+    data.transactionDate = format(date, "yyyy-MM-dd");
 
     delete data.switch;
+    delete data.category;
 
     dispatch(addTransactions(data));
     dispatch(closeAddModal());
@@ -217,14 +229,14 @@ function AddTransactionForm() {
             render={({ field }) => (
               <>
                 <DatePicker
-                  selected={field.value || formattedDate}
+                  selected={field.value || currentDate}
                   onChange={(date) => field.onChange(date)}
                   dateFormat="dd.MM.yyyy"
                   open={isDatePickerOpen}
                   onClickOutside={() => setIsDatePickerOpen(false)}
                   className={s.customDatePicker}
                   calendarClassName={s.calendarClassName}
-                  maxDate={formattedDate}
+                  maxDate={currentDate}
                 />
               </>
             )}
