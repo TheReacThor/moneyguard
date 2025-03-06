@@ -1,0 +1,48 @@
+.title {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.incomeTitle {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 16px;
+  text-align: right;
+  color: var(--yellow);
+}
+.expenseTitle {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--white-600);
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.input {
+  width: 280px;
+  height: 35px;
+  border: none;
+  border-bottom: 1px solid var(--white-400);
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--white);
+  background-color: transparent !important;
+  padding-bottom: 8px;
+  transition: background-color 5000s ease-in-out 0s;
+}
+.input::placeholder {
+  color: var(--white);
+  padding-left: 20px;
+}
+.textarea {
+  height: 79px;
+}
