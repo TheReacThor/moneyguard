@@ -30,7 +30,7 @@
 
   color: var(--text-color);
   background-color: black;
-  background-image: url("../assets/gradient-desktop.webp");
+  background-image: url("/assets/gradient-desktop.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -46,17 +46,17 @@
 
 @media only screen and (max-width: 767.98px) {
   :root {
-    background-image: url("../assets/gradient-mobile.webp");
+    background-image: url("/assets/gradient-mobile.webp");
   }
 }
 @media only screen and (min-width: 768px) {
   :root {
-    background-image: url("../assets/gradient-tablet.webp");
+    background-image: url("/assets/gradient-tablet.webp");
   }
 }
 @media only screen and (min-width: 1280px) {
   :root {
-    background-image: url("../assets/gradient-desktop.webp");
+    background-image: url("/assets/gradient-desktop.webp");
   }
 }
 
