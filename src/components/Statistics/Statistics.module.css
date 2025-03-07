@@ -10,6 +10,7 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 20px;
+  position: relative;
 }
 
 .sidebar {
@@ -20,6 +21,8 @@
   flex-direction: column;
   gap: 30px;
   margin-top: 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.6);
+  padding-right: 20px;
 }
 
 .statisticsContent {
@@ -68,6 +71,8 @@
     width: 100%;
     min-width: auto;
     margin-bottom: 20px;
+    border-right: none;
+    padding-right: 0;
   }
 
   .statisticsContent {
@@ -99,6 +104,8 @@
     width: 100%;
     min-width: auto;
     margin-bottom: 20px;
+    border-right: none;
+    padding-right: 0;
   }
 
   .content {

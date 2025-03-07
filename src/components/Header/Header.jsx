@@ -24,22 +24,24 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <Link to="/" className={styles.logo}>
-        <HeaderLogoSvg />
-        Money Guard
-      </Link>
-      <div className={styles.userInfo}>
-        <span className={styles.username}>
-          {username ? username : "Hello anonymous"}
-        </span>
-        <div>
-          <button className={styles.logoutButton} onClick={handleLogoutClick}>
-            <HeaderExitSvg />
-            Exit
-          </button>
+      <div className={styles.container}>
+        <Link to="/" className={styles.logo}>
+          <HeaderLogoSvg />
+          Money Guard
+        </Link>
+        <div className={styles.userInfo}>
+          <span className={styles.username}>
+            {username ? username : "Hello anonymous"}
+          </span>
+          <div>
+            <button className={styles.logoutButton} onClick={handleLogoutClick}>
+              <HeaderExitSvg />
+              Exit
+            </button>
+          </div>
         </div>
+        {isModalOpen && <LogOutModal onClose={closeModal} />}
       </div>
-      {isModalOpen && <LogOutModal onClose={closeModal} />}
     </header>
   );
 };

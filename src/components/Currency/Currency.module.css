@@ -74,10 +74,12 @@
 .currency_wrapper {
   max-width: 280px;
   color: #fbfbfb;
-  background-color: rgba(74, 86, 226, 0.1);
+  background-color: rgba(82, 59, 126, 0.6);
   margin-top: 32px;
   margin-right: auto;
-  border-radius: 0;
+  border-radius: 8px;
+  box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(50px);
 }
 
 .currency_table {
@@ -89,6 +91,8 @@
   grid-template-columns: repeat(3, 1fr);
   background-color: rgba(255, 255, 255, 0.2);
   padding: 12px 20px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .currency_item {
@@ -146,7 +150,7 @@
   .currency_wrapper {
     max-width: 280px;
     margin-top: 0;
-    border-radius: 0 0 8px 8px;
+    border-radius: 8px;
   }
 }
 

@@ -11,10 +11,9 @@ const ChartDoughnut = ({ categoriesData, totalExpenses }) => {
   if (!categoriesData || categoriesData.length === 0) {
     return (
       <div className={styles.chartContainer}>
-        <div>
-          <p>Add some expenses and incomes to see the chart
-
-Your balance is ₴ 0.00 </p>
+        <div className={styles.emptyChartMessage}>
+          <p>Add some expenses and incomes to see the chart</p>
+          <p>Your balance is € 0.00</p>
         </div>
       </div>
     );

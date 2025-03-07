@@ -50,6 +50,21 @@
   font-style: italic;
 }
 
+.emptyChartMessage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+  color: #fbfbfb;
+  text-align: center;
+}
+
+.emptyChartMessage p {
+  margin: 5px 0;
+}
+
 @media (max-width: 768px) {
   .chartWrapper {
     height: 250px;

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import TransactionList from "../TransactionList/TransactionList"; // Sonra oluşturulacak
 import Balance from "../Balance/Balance"; // Sonra oluşturulacak
-import ButtonAddTransactions from "../ButtonAddTransactions/ButtonAddTransactions";
 import { getTransactions } from "../../redux/Transactions/operations"; // Task 13'ten
 import Navigation from "../Navigation/Navigation";
 import Currency from "../Currency/Currency";
@@ -25,7 +24,6 @@ const HomeTab = () => {
         {isDesktop && <Currency />}
       </div>
       <TransactionList />
-      <ButtonAddTransactions />
     </div>
   );
 };

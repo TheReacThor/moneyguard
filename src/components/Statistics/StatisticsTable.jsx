@@ -117,37 +117,37 @@ const StatisticsTable = () => {
         </div>
       </div>
 
-      {expenses.length === 0 && income.length === 0 ? (
-        <div className={styles.emptyMessage}>No transactions available yet.</div>
-      ) : (
-        <>
-          <div className={styles.tableBody}>
-            {sortedExpenses.map((item, index) => (
-              <div key={index} className={styles.tableRow}>
-                <div className={styles.categoryCell}>
-                  <span 
-                    className={styles.colorIndicator} 
-                    style={{ backgroundColor: categoryColors[item.name] || '#734AEF' }}
-                  ></span>
-                  <span>{item.name}</span>
-                </div>
-                <div className={styles.sumCell}>{Math.abs(parseFloat(item.total)).toFixed(2)}</div>
+      <div className={styles.tableBody}>
+        {expenses.length > 0 ? (
+          sortedExpenses.map((item, index) => (
+            <div key={index} className={styles.tableRow}>
+              <div className={styles.categoryCell}>
+                <span 
+                  className={styles.colorIndicator} 
+                  style={{ backgroundColor: categoryColors[item.name] || '#734AEF' }}
+                ></span>
+                <span>{item.name}</span>
               </div>
-            ))}
-          </div>
+              <div className={styles.sumCell}>{Math.abs(parseFloat(item.total)).toFixed(2)}</div>
+            </div>
+          ))
+        ) : (
+          expenses.length === 0 && income.length === 0 && (
+            <div className={styles.emptyMessage}>Add some expenses and incomes to see the chart</div>
+          )
+        )}
+      </div>
 
-          <div className={styles.tableSummary}>
-            <div className={styles.summaryRow}>
-              <div className={styles.summaryLabel}>Expenses:</div>
-              <div className={styles.summaryValue}>{totalExpenses.toFixed(2)}</div>
-            </div>
-            <div className={styles.summaryRow}>
-              <div className={styles.summaryLabel}>Income:</div>
-              <div className={styles.summaryValue}>{totalIncome.toFixed(2)}</div>
-            </div>
-          </div>
-        </>
-      )}
+      <div className={styles.tableSummary}>
+        <div className={styles.summaryRow}>
+          <div className={styles.summaryLabel}>Expenses:</div>
+          <div className={styles.summaryValue}>{totalExpenses.toFixed(2)}</div>
+        </div>
+        <div className={styles.summaryRow}>
+          <div className={styles.summaryLabel}>Income:</div>
+          <div className={styles.summaryValue}>{totalIncome.toFixed(2)}</div>
+        </div>
+      </div>
     </div>
   );
 };

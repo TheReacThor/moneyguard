@@ -7,6 +7,7 @@ import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
 import Balance from '../Balance/Balance';
 import Currency from '../Currency/Currency';
+import ButtonAddTransactions from '../ButtonAddTransactions/ButtonAddTransactions';
 import useMedia from '../../hooks/useMedia';
 import { selectSummary, selectCategories } from '../../redux/Statistics/selectors';
 import { getTransactionsCategories } from '../../redux/Statistics/operations';
@@ -80,6 +81,7 @@ const Statistics = () => {
             </div>
           </div>
         </div>
+        <ButtonAddTransactions />
       </div>
     </div>
   );
