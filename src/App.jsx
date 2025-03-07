@@ -16,6 +16,7 @@ import {
   selectIsAddModalOpen,
   selectIsEditModalOpen,
 } from "./redux/Modals/slice";
+import { selectIsLoggedIn } from "./redux/Auth/selectors";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -27,10 +28,13 @@ function App() {
 
   const isEditOpen = useSelector(selectIsEditModalOpen);
   const isAddOpen = useSelector(selectIsAddModalOpen);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
-    dispatch(getTransactionsCategories());
-  }, [dispatch]);
+    if (isLoggedIn) {
+      dispatch(getTransactionsCategories());
+    }
+  }, [dispatch, isLoggedIn]);
 
   return (
     <div className={clsx("app", (isEditOpen || isAddOpen) && "block-scroll")}>
