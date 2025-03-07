@@ -1,5 +1,5 @@
 .container {
-  background-color: var(--table-background-color);
+  background-color: rgba(74, 86, 226, 0.1);
   border-radius: 8px;
   width: 100%;
   max-width: 480px;
@@ -15,7 +15,7 @@
 }
 
 .currencyTable thead {
-  background-color: var(--table-header-color);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .currencyTable th {
@@ -23,7 +23,7 @@
   font-size: 16px;
   line-height: 24px;
   text-align: center;
-  color: var(--white-color);
+  color: #fbfbfb;
   padding: 12px 8px;
 }
 
@@ -31,7 +31,7 @@
   font-size: 16px;
   line-height: 24px;
   text-align: center;
-  color: var(--white-color);
+  color: #fbfbfb;
   padding: 12px 8px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -45,16 +45,16 @@
 .empty {
   text-align: center;
   padding: 20px;
-  color: var(--white-color);
+  color: #fbfbfb;
   font-size: 16px;
-  background-color: var(--table-background-color);
+  background-color: rgba(74, 86, 226, 0.1);
   border-radius: 8px;
   margin: 0 auto;
   max-width: 480px;
 }
 
 .error {
-  color: var(--error-color);
+  color: #ff6596;
 }
 
 @media screen and (max-width: 768px) {
@@ -72,8 +72,8 @@
 }
 
 .currency_wrapper {
-  max-width: 320px;
-  color: var(--white-color);
+  max-width: 280px;
+  color: #fbfbfb;
   background-color: rgba(74, 86, 226, 0.1);
   margin-top: 32px;
   margin-left: auto;
@@ -145,7 +145,7 @@
 
 @media screen and (min-width: 768px) {
   .currency_wrapper {
-    max-width: 336px;
+    max-width: 280px;
     margin-top: 0;
     border-radius: 0 0 8px 8px;
   }
@@ -153,13 +153,14 @@
 
 @media screen and (min-width: 1280px) {
   .currency_wrapper {
-    max-width: 480px;
+    max-width: 280px;
     margin-top: 32px;
     border-radius: 8px;
   }
 
   .diagram img {
-    width: 480px;
-    height: 167px;
+    width: 280px;
+    height: auto;
+    max-height: 167px;
   }
 }

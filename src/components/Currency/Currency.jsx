@@ -44,7 +44,7 @@ const Currency = () => {
         <div className={styles.diagram}>
           <p className={styles.lowerNumber}>{buyUSD}</p>
           <p className={styles.higherNumber}>{buyEUR}</p>
-          <img src="/img/currency.png" alt="Currency chart" />
+          <img src={`${import.meta.env.BASE_URL}img/currency.png`} alt="Currency chart" />
         </div>
       )}
     </div>
