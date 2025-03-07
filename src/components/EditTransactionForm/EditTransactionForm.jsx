@@ -12,6 +12,7 @@ import { editTransactions } from "../../redux/Transactions/operations";
 import { closeEditModal, selectIsEditID } from "../../redux/Modals/slice";
 import styles from "./EditTransactionForm.module.css";
 import clsx from "clsx";
+import { toast } from "react-toastify";
 
 function EditTransactionForm() {
   const categories = useSelector(selectCategories);
@@ -85,10 +86,14 @@ function EditTransactionForm() {
       )
         .unwrap()
         .then(() => {
+          toast.success("Transaction updated successfully");
           dispatch(closeEditModal());
+        })
+        .catch((error) => {
+          toast.error(error || "Failed to update transaction");
         });
     } catch (error) {
-      // Hata durumunda sessizce devam et
+      toast.error("An error occurred while updating the transaction");
     }
   };
 

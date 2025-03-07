@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { addTransactions } from "../../redux/Transactions/operations";
 import { closeAddModal } from "../../redux/Modals/slice";
 import CustomDropIndicator from "../CustomDropIndicator/CustomDropIndicator";
+import { toast } from "react-toastify";
 
 function AddTransactionForm() {
   // API'dan gelen kategoriler
@@ -114,7 +115,7 @@ function AddTransactionForm() {
       // Income işlemi
       const incomeCategory = categories.find((el) => el.type === "INCOME");
       if (!incomeCategory) {
-        console.error("Income category not found");
+        toast.error("Income category not found");
         return;
       }
       data.categoryId = incomeCategory.id;
@@ -129,7 +130,7 @@ function AddTransactionForm() {
           (el) => el.name === "Main expenses"
         );
         if (!defaultExpenseCategory) {
-          console.error("Default expense category not found");
+          toast.error("Default expense category not found");
           return;
         }
         data.categoryId = defaultExpenseCategory.id;
@@ -145,8 +146,15 @@ function AddTransactionForm() {
     delete data.switch;
     delete data.category;
 
-    dispatch(addTransactions(data));
-    dispatch(closeAddModal());
+    dispatch(addTransactions(data))
+      .unwrap()
+      .then(() => {
+        toast.success("Transaction added successfully");
+        dispatch(closeAddModal());
+      })
+      .catch((error) => {
+        toast.error(error || "Failed to add transaction");
+      });
   };
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);

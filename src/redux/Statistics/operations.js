@@ -1,6 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { getTransactionSummary, getCategories } from "../../services/statistics-api";
+import {
+  getTransactionSummary,
+  getCategories,
+} from "../../services/statistics-api";
 import { setToken } from "../../config/userTransactionApi";
 
 export const getTransactionsSummaryByPeriod = createAsyncThunk(
@@ -33,7 +36,9 @@ export const getTransactionsCategories = createAsyncThunk(
       const data = await getCategories();
       return data;
     } catch (error) {
-      toast.error(error.response?.data?.message || "Kategoriler alınamadı");
+      toast.error(
+        error.response?.data?.message || "Categories could not be retrieved"
+      );
       return thunkAPI.rejectWithValue(error.message);
     }
   }

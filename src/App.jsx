@@ -16,6 +16,8 @@ import {
   selectIsAddModalOpen,
   selectIsEditModalOpen,
 } from "./redux/Modals/slice";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
 
@@ -49,6 +51,18 @@ function App() {
       </Routes>
       <ModalAddTransaction />
       <ModalEditTransaction />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 }
