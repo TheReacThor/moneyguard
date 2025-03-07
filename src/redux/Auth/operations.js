@@ -15,9 +15,23 @@ export const registerThunk = createAsyncThunk(
         credentials
       );
       setToken(data.token);
-      return data;
+      return {
+        user: {
+          username: credentials.username,
+          email: credentials.email,
+          balance: data.user.balance,
+        },
+        token: data.token,
+      };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      // API'den gelen spesifik hata mesajını kontrol et
+      if (error.response?.status === 409) {
+        return thunkAPI.rejectWithValue("This email is already registered");
+      }
+      // Diğer hata durumları için
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || error.message || "Registration failed"
+      );
     }
   }
 );
