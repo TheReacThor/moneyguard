@@ -220,6 +220,7 @@ function AddTransactionForm() {
             autoComplete="off"
             placeholder="0.00"
             className={s.sum}
+            autoFocus
             onKeyPress={(event) => {
               if (!/[0-9.]/.test(event.key)) {
                 event.preventDefault();

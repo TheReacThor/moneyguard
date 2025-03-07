@@ -50,7 +50,7 @@ function LoginForm() {
               <div className={style.inputWrapper}>
                 <div className={style.inputContainer}>
                   <img src={emailIcon} alt='Email Icon' className={style.icon} />
-                  <Field className={style.input} type='email' name='email' placeholder='E-mail' />
+                  <Field className={style.input} type='email' name='email' placeholder='E-mail' autoFocus />
                 </div>
                 <ErrorMessage name='email' component='div' className={style.error} />
               </div>
