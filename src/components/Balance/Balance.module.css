@@ -1,5 +1,6 @@
 .balanceWrapper {
   width: 100%;
+  max-width: 280px;
   padding: 8px 0;
   background: rgba(82, 59, 126, 0.6);
   border-radius: 8px;
