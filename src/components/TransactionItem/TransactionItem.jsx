@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { deleteTransactions } from "../../redux/Transactions/operations";
 import { openEditModal, addEditId } from "../../redux/Modals/slice";
 import { format, parseISO } from "date-fns";
+import { toast } from "react-toastify";
 
 const TransactionItem = ({ transaction }) => {
   const dispatch = useDispatch();
@@ -15,7 +16,14 @@ const TransactionItem = ({ transaction }) => {
   };
 
   const handleDeleteClick = () => {
-    dispatch(deleteTransactions(id));
+    dispatch(deleteTransactions(id))
+      .unwrap()
+      .then(() => {
+        toast.success("Transaction deleted successfully");
+      })
+      .catch((error) => {
+        toast.error(error || "Failed to delete transaction");
+      });
   };
 
   // Format date safely
