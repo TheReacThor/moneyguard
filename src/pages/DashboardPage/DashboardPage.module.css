@@ -6,12 +6,12 @@
 
 .container {
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  padding: 0 20px;
+  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
   position: relative;
+  padding: 0 20px;
 }
 
 @media only screen and (max-width: 767.98px) {
@@ -21,24 +21,17 @@
   }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) and (max-width: 1279.98px) {
   .container {
     gap: 20px;
     padding: 0 32px 56px;
-  }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 1279.98px) {
-  .container {
-    padding: 0 32px 56px;
+    max-width: 774px; /* 710px content + 32px padding each side */
   }
 }
 
 /* DESKTOP */
 @media only screen and (min-width: 1280px) {
   .container {
-    max-width: 1280px;
-    margin: 0 auto;
     padding: 0 20px;
   }
 }

@@ -151,64 +151,13 @@
   }
 
   .tableHeader {
-    display: none;
+    grid-template-columns: 1fr 0.5fr 1fr 1.5fr 1fr 0.5fr;
+    padding: 12px 15px;
+    gap: 10px;
   }
 
-  .transactionList {
-    align-items: center;
-    gap: 8px;
-    margin-top: 32px;
-  }
-
-  .emptyTransactionsContainer {
-    margin-top: 40px;
-    width: 280px;
-  }
-}
-
-@media screen and (min-width: 769px) and (max-width: 1279px) {
-  .tableContainer {
-    width: 100%;
-    padding-top: 0;
-    margin: 0 auto;
-  }
-
-  .tableHeader {
-    width: 100%;
-    max-width: 710px;
-    margin: 0 auto;
-  }
-
-  .headerCell:nth-child(3) {
-    width: 130px;
-    text-align: left;
-    padding-left: 20px;
-  }
-
-  .headerCell:nth-child(4) {
-    width: 150px;
-    text-align: left;
-    padding-left: 20px;
-  }
-
-  .headerCell:nth-child(5) {
-    width: 88px;
-    text-align: right;
-    padding-right: 20px;
-  }
-
-  .transactionList {
-    width: 100%;
-    max-width: 710px;
-    max-height: calc(100vh - 460px);
-    margin: 0 auto;
-  }
-
-  .emptyTransactionsContainer {
-    width: 100%;
-    max-width: 710px;
-    height: calc(100vh - 460px);
-    margin: 0 auto;
+  .headerCell {
+    font-size: 14px;
   }
 }
 
@@ -219,16 +168,7 @@
   }
 
   .tableHeader {
-    width: 715px;
-  }
-
-  .transactionList {
-    width: 715px;
-    max-height: calc(100vh - 292px);
-  }
-
-  .emptyTransactionsContainer {
-    width: 715px;
-    max-height: calc(100vh - 292px);
+    padding: 15px 30px;
+    gap: 30px;
   }
 }

@@ -122,19 +122,7 @@
 }
 
 @media (hover: hover) {
-  .active:hover,
-  .active:focus {
-    & .linkIcon::before {
-      background-color: rgb(74, 86, 226);
-    }
-  }
-  .navLink:hover,
-  .navLink:focus {
-    & .homeIcon,
-    .graphicIcon,
-    .currencyIcon {
-      fill: #ffffff;
-      color: #ffffff;
-    }
+  .navLink:not(.active):hover .linkIcon::before {
+    background-color: rgba(255, 255, 255, 0.7);
   }
 }

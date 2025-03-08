@@ -5,8 +5,7 @@
   border-radius: 8px;
   box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(50px);
-  font-family: "Poppins", sans-serif;
-  grid-area: balance;
+  margin-top: 28px;
 }
 
 .balanceTitle {
@@ -14,7 +13,6 @@
   color: rgba(255, 255, 255, 0.4);
   margin: 8px 0 8px 32px;
   text-transform: uppercase;
-  font-family: "Poppins", sans-serif;
 }
 
 .balanceAmount {
@@ -25,22 +23,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: "Poppins", sans-serif;
 }
 
 .currencySymbol {
   font-weight: 400;
-  font-family: "Poppins", sans-serif;
-}
-
-@media (min-width: 768px) and (max-width: 1279px) {
-  .balanceWrapper {
-    width: 336px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .balanceWrapper {
-    width: 100%;
-  }
 }

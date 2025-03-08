@@ -13,16 +13,14 @@
   padding: 15px 20px;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
 }
 
 .categoryHeader,
 .sumHeader {
-  color: var(--white-color);
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
   display: flex;
   align-items: center;
   user-select: none;
@@ -36,12 +34,6 @@
 .sumHeader {
   text-align: right;
   justify-content: flex-end;
-  padding-right: 20px;
-}
-
-.categoryHeader:hover,
-.sumHeader:hover {
-  color: #ffc727;
 }
 
 .sortIcon {
@@ -112,11 +104,9 @@
 
 .summaryValue {
   color: #ff6596;
-  text-align: right;
-  padding-right: 20px;
 }
 
-.summaryRow:last-child .summaryValue {
+.summaryValue.income {
   color: #24cca7;
 }
 
@@ -136,47 +126,17 @@
 
 @media screen and (max-width: 768px) {
   .tableContainer {
-    margin-top: 32px;
-    padding: 0;
-    border-radius: 0;
+    padding: 15px;
   }
 
   .tableHeader,
   .tableRow,
   .summaryRow {
-    padding: 12px 15px;
-    gap: 10px;
-  }
-
-  .categoryHeader,
-  .sumHeader {
-    font-size: 14px;
-  }
-
-  .tableRow {
-    font-size: 14px;
-  }
-
-  .categoryCell,
-  .summaryLabel {
-    padding-left: 10px;
+    padding: 10px;
   }
 
   .sumCell,
-  .summaryValue {
-    padding-right: 10px;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .tableContainer {
-    margin-left: 69px;
-    max-width: calc(100% - 69px);
-  }
-
-  .tableHeader,
-  .tableRow {
-    padding: 15px 30px;
-    gap: 30px;
+  .sumHeader {
+    width: 100px;
   }
 }
