@@ -39,7 +39,7 @@
 @media screen and (max-width: 767px) {
   .wrap {
     right: 20px;
-    bottom: -40px;
+    bottom: 0px;
   }
 }
 

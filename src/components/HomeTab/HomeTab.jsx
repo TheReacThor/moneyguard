@@ -18,11 +18,31 @@ const HomeTab = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.sidebar}>
-        <Navigation />
-        <Balance />
-        {isDesktop && <Currency />}
-      </div>
+      {!isMobile && (
+        <div className={styles.sidebar}>
+          {isTablet && (
+            <>
+              <div style={{ gridArea: "navigation" }}>
+                <Navigation />
+              </div>
+              <div style={{ gridArea: "balance" }}>
+                <Balance />
+              </div>
+              <div style={{ gridArea: "currency" }}>
+                <Currency />
+              </div>
+            </>
+          )}
+
+          {isDesktop && (
+            <>
+              <Navigation />
+              <Balance />
+              <Currency />
+            </>
+          )}
+        </div>
+      )}
       <TransactionList />
     </div>
   );

@@ -1,6 +1,6 @@
 .dashboardPage {
   min-height: 100vh;
-  background: linear-gradient(180deg, #2e1e5e 0%, #1f1348 100%);
+  /* background: linear-gradient(180deg, #2e1e5e 0%, #1f1348 100%); */
   color: var(--white);
 }
 
@@ -34,10 +34,11 @@
 }
 
 .title {
+  font-family: var(--font-family);
+  font-weight: 400;
   font-size: 30px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  text-align: center;
+  text-align: left;
+  color: var(--white);
 }
 
 .selectors {
