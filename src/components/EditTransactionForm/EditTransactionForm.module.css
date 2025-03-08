@@ -332,3 +332,112 @@ input[type="number"]:focus {
   text-align: left;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
+
+.calendarClassName.react-datepicker {
+  background: #ffffff !important;
+  border-radius: 8px;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  padding: 20px;
+}
+
+.calendarClassName .react-datepicker__header {
+  background-color: #ffffff !important;
+  border: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.customHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+.currentMonth {
+  color: #000000;
+  font-weight: 700;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  text-transform: capitalize;
+}
+
+.navButton {
+  background: none;
+  border: none;
+  color: #000000;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.navButton:hover {
+  background-color: rgba(115, 74, 239, 0.1);
+}
+
+.navButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.calendarClassName .react-datepicker__month {
+  margin: 0;
+  padding: 0;
+}
+
+.calendarClassName .react-datepicker__day-name {
+  color: #000000;
+  font-weight: 500;
+  margin: 5px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+}
+
+.calendarClassName .react-datepicker__day {
+  color: #000000;
+  font-weight: 400;
+  margin: 5px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 50%;
+}
+
+.calendarClassName .react-datepicker__day:hover {
+  background-color: rgba(115, 74, 239, 0.1);
+  color: #734aef;
+}
+
+.calendarClassName .react-datepicker__day--selected {
+  background-color: #734aef;
+  color: #ffffff;
+}
+
+.calendarClassName .react-datepicker__day--keyboard-selected {
+  background-color: #734aef;
+  color: #ffffff;
+}
+
+.calendarClassName .react-datepicker__day--disabled {
+  color: #ccc;
+}
+
+.calendarPopper {
+  z-index: 1000;
+}
+
+.calendarDay {
+  margin: 0.2rem;
+}
+
+.calendarMonth {
+  margin: 0;
+}
+
+.calendarWeekDay {
+  color: #000000 !important;
+}

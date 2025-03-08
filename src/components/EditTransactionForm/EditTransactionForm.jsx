@@ -171,6 +171,42 @@ function EditTransactionForm() {
                   onClickOutside={() => setIsDatePickerOpen(false)}
                   className={styles.customDatePicker}
                   calendarClassName={styles.calendarClassName}
+                  showPopperArrow={false}
+                  popperClassName={styles.calendarPopper}
+                  locale="en-US"
+                  maxDate={new Date()}
+                  renderCustomHeader={({
+                    date,
+                    decreaseMonth,
+                    increaseMonth,
+                    prevMonthButtonDisabled,
+                    nextMonthButtonDisabled,
+                  }) => (
+                    <div className={styles.customHeader}>
+                      <button
+                        type="button"
+                        onClick={decreaseMonth}
+                        disabled={prevMonthButtonDisabled}
+                        className={styles.navButton}
+                      >
+                        {"<"}
+                      </button>
+                      <div className={styles.currentMonth}>
+                        {date.toLocaleString("en-US", {
+                          month: "long",
+                          year: "numeric",
+                        })}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={increaseMonth}
+                        disabled={nextMonthButtonDisabled}
+                        className={styles.navButton}
+                      >
+                        {">"}
+                      </button>
+                    </div>
+                  )}
                 />
               )}
             />

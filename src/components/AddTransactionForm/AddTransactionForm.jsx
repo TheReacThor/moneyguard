@@ -246,6 +246,41 @@ function AddTransactionForm() {
                   className={s.customDatePicker}
                   calendarClassName={s.calendarClassName}
                   maxDate={currentDate}
+                  showPopperArrow={false}
+                  popperClassName={s.calendarPopper}
+                  locale="en-US"
+                  renderCustomHeader={({
+                    date,
+                    decreaseMonth,
+                    increaseMonth,
+                    prevMonthButtonDisabled,
+                    nextMonthButtonDisabled,
+                  }) => (
+                    <div className={s.customHeader}>
+                      <button
+                        type="button"
+                        onClick={decreaseMonth}
+                        disabled={prevMonthButtonDisabled}
+                        className={s.navButton}
+                      >
+                        {"<"}
+                      </button>
+                      <div className={s.currentMonth}>
+                        {date.toLocaleString("en-US", {
+                          month: "long",
+                          year: "numeric",
+                        })}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={increaseMonth}
+                        disabled={nextMonthButtonDisabled}
+                        className={s.navButton}
+                      >
+                        {">"}
+                      </button>
+                    </div>
+                  )}
                 />
               </>
             )}
