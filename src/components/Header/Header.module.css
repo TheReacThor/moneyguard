@@ -54,17 +54,26 @@
   .container {
     padding: 0.5rem 1rem;
   }
-  
+
   .logo {
     font-size: 15px;
   }
-  
+
   .username {
     font-size: 14px;
   }
-  
+
   .logoutButton {
     font-size: 14px;
+  }
+  .headerLine {
+    display: none;
+  }
+  .headerExit {
+    display: none;
+  }
+  .username {
+    margin-right: 8px;
   }
 }
 

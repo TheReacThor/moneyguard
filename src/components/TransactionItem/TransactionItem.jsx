@@ -40,7 +40,7 @@ const TransactionItem = ({ transaction }) => {
 
   // Format type
   const transactionType = type === "INCOME" ? "+" : "-";
-  
+
   // Create mobile view data
   const mobileData = [
     { label: "date", value: formatDate(date) },
@@ -51,16 +51,23 @@ const TransactionItem = ({ transaction }) => {
   ];
 
   return isMobile ? (
-    <li className={`${styles.transactionItem} ${type === "EXPENSE" ? styles.expense : styles.income}`}>
+    <li
+      className={`${styles.transactionItem} ${
+        type === "EXPENSE" ? styles.expense : styles.income
+      }`}
+    >
       {mobileData.map((item, index) => (
         <div key={index} className={styles.mobileRow}>
           <div className={styles.mobileLabel}>{item.label}</div>
-          <div 
+          <div
             className={styles.mobileValue}
-            style={{ 
-              color: item.label === "sum" || item.label === "type" 
-                ? type === "EXPENSE" ? "var(--red-color)" : "var(--yellow-color)" 
-                : "inherit" 
+            style={{
+              color:
+                item.label === "sum" || item.label === "type"
+                  ? type === "EXPENSE"
+                    ? "var(--red-color)"
+                    : "var(--yellow-color)"
+                  : "inherit",
             }}
           >
             {item.value}
