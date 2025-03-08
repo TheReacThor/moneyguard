@@ -10,9 +10,11 @@ import PasswordStrengthBar from "react-password-strength-bar-with-style-item";
 import { useDispatch } from "react-redux";
 import { registerThunk } from "../../redux/Auth/operations";
 import { toast } from "react-toastify";
+import { useRef } from "react";
 
 function RegisterForm() {
   const dispatch = useDispatch();
+  const nameInputRef = useRef(null);
 
   const handleSubmit = ({ name, email, password }, { resetForm }) => {
     dispatch(registerThunk({ username: name, email, password }))
@@ -25,6 +27,12 @@ function RegisterForm() {
       })
       .catch((error) => {
         toast.error(error);
+        // Hatalı kayıt işleminden sonra name alanına odaklan
+        setTimeout(() => {
+          if (nameInputRef.current) {
+            nameInputRef.current.focus();
+          }
+        }, 0);
       });
   };
 
@@ -62,6 +70,8 @@ function RegisterForm() {
                     type="text"
                     name="name"
                     placeholder="Name"
+                    autoFocus
+                    innerRef={nameInputRef}
                   />
                 </div>
                 <ErrorMessage

@@ -17,11 +17,12 @@
 
 .logo {
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   font-weight: 400;
   font-size: 17px;
   color: var(--white);
+  text-decoration: none;
 }
 
 .userInfo {
@@ -33,6 +34,7 @@
   margin-right: 1rem;
   font-size: 16px;
   color: var(--white);
+  opacity: 0.6;
 }
 
 .logoutButton {
@@ -43,4 +45,32 @@
   font-weight: 400;
   font-size: 16px;
   color: var(--white-600);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0.5rem 1rem;
+  }
+  
+  .logo {
+    font-size: 15px;
+  }
+  
+  .username {
+    font-size: 14px;
+  }
+  
+  .logoutButton {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279.98px) {
+  .container {
+    max-width: 774px; /* 710px content + 32px padding each side */
+    padding: 1rem 32px;
+  }
 }

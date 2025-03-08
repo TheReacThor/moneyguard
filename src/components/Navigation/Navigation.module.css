@@ -4,7 +4,6 @@
   gap: 38px;
   justify-content: center;
   margin-top: 12px;
-  padding-top: 20px;
   grid-area: navigation;
 }
 
@@ -19,23 +18,9 @@
   display: none;
 }
 
-.navLink.active .linkText {
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.navLink.active .linkIcon {
-  border-radius: 4px;
-}
-
-.navLink:not(.active):hover .linkText {
-  color: #ffffff;
-  transition: all 0.3s ease;
-}
-
 .linkIcon {
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,18 +28,16 @@
 }
 
 .linkIcon::before {
-  content: "";
+  content: '';
   display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
+  border-radius: 10px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: -1;
-  background-color: rgba(255, 255, 255, 0.2);
-  transition: background-color 0.3s ease;
 }
 
 .active .linkIcon::before {
@@ -64,25 +47,26 @@
 .homeIcon,
 .graphicIcon,
 .currencyIcon {
-  width: 28px;
-  height: 28px;
+  font-size: 24px;
   fill: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .active .homeIcon,
 .active .graphicIcon,
 .active .currencyIcon {
-  fill: #4A56E2;
+  fill: rgb(74, 86, 226);
+  color: rgb(74, 86, 226);
 }
 
 @media screen and (min-width: 768px) {
   .navigation {
     flex-direction: column;
     gap: 12px;
-    align-self: start;
-    margin-left: 30px;
-    margin-top: 0;
-    padding-top: 20px;
+    align-self: flex-start;
+    margin-left: 0;
+    margin-top: 40px;
+    justify-content: flex-start;
   }
 
   .navLink {
@@ -123,12 +107,11 @@
     width: 32px;
     height: 32px;
   }
-
+  
   .homeIcon,
   .graphicIcon,
-  .dollarIcon {
-    width: 20px;
-    height: 20px;
+  .currencyIcon {
+    font-size: 18px;
   }
 }
 
@@ -139,7 +122,19 @@
 }
 
 @media (hover: hover) {
-  .navLink:not(.active):hover .linkIcon::before {
-    background-color: rgba(255, 255, 255, 0.7);
+  .active:hover,
+  .active:focus {
+    & .linkIcon::before {
+      background-color: rgb(74, 86, 226);
+    }
+  }
+  .navLink:hover,
+  .navLink:focus {
+    & .homeIcon,
+    .graphicIcon,
+    .currencyIcon {
+      fill: #FFFFFF;
+      color: #FFFFFF;
+    }
   }
 }

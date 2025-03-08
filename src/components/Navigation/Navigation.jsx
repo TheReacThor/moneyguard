@@ -12,7 +12,7 @@ const Navigation = () => {
 
   return (
     <nav className={styles.navigation}>
-      <NavLink to="/home" className={({ isActive }) => getClasses(isActive)}>
+      <NavLink to="/" className={({ isActive }) => getClasses(isActive)}>
         <div className={styles.linkIcon}>
           <MdHome className={styles.homeIcon} />
         </div>

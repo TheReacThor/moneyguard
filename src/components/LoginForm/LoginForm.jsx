@@ -9,23 +9,31 @@ import { toast } from 'react-toastify';
 import { loginThunk } from '../../redux/Auth/operations';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 
 function LoginForm() {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-    const handleSubmit = (values, { resetForm }) => {
-        dispatch(loginThunk(values))
-            .unwrap()
-            .then(data => {
-                toast.success(`Welcome ${data.user.username}!`);
-                navigate('/')
-            })
-            .catch(() => {
-                toast.error('Invalid credentials');
-            });
-        resetForm();
-    };
+  const emailInputRef = useRef(null);
+
+  const handleSubmit = (values, { resetForm }) => {
+    dispatch(loginThunk(values))
+      .unwrap()
+      .then(data => {
+        toast.success(`Welcome ${data.user.username}!`);
+        navigate('/')
+      })
+      .catch(() => {
+        toast.error('Invalid credentials');
+        // Hatalı login işleminden sonra email alanına odaklan
+        setTimeout(() => {
+          if (emailInputRef.current) {
+            emailInputRef.current.focus();
+          }
+        }, 0);
+      });
+    resetForm();
+  };
 
   const initialValues = {
     email: '',
@@ -50,7 +58,14 @@ function LoginForm() {
               <div className={style.inputWrapper}>
                 <div className={style.inputContainer}>
                   <img src={emailIcon} alt='Email Icon' className={style.icon} />
-                  <Field className={style.input} type='email' name='email' placeholder='E-mail' autoFocus />
+                  <Field 
+                    className={style.input} 
+                    type='email' 
+                    name='email' 
+                    placeholder='E-mail' 
+                    autoFocus 
+                    innerRef={emailInputRef} 
+                  />
                 </div>
                 <ErrorMessage name='email' component='div' className={style.error} />
               </div>

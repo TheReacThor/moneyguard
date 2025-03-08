@@ -4,13 +4,13 @@
 }
 
 .sidebar {
-  width: 30%;
-  min-width: 280px;
-  max-width: 320px;
+  width: 100%;
+  max-width: 480px;
   display: flex;
   flex-direction: column;
   gap: 30px;
   border-right: 1px solid rgba(255, 255, 255, 0.6);
+  padding-right: 69px;
 }
 
 /* Mobil görünüm */
@@ -21,11 +21,7 @@
   }
 
   .sidebar {
-    width: 100%;
-    min-width: auto;
-    margin-bottom: 20px;
-    border-right: none;
-    padding-right: 0;
+    display: none;
   }
 }
 
@@ -34,20 +30,29 @@
   .container {
     flex-direction: column;
     gap: 30px;
+    max-width: 710px;
+    margin: 0 auto;
   }
 
   .sidebar {
     width: 100%;
-    min-width: auto;
-    margin-bottom: 20px;
+    max-width: 710px;
+    margin: 0 auto;
     border-right: none;
     padding-right: 0;
+    display: grid;
+    gap: 28px 32px;
+    grid-template-columns: 336px 336px;
+    grid-template-areas: 
+      "navigation currency"
+      "balance currency";
+    justify-content: space-between;
   }
 }
 
 /* Masaüstü görünüm */
 @media (min-width: 1280px) {
   .container {
-    gap: 40px;
+    gap: 69px;
   }
 }

@@ -15,11 +15,14 @@ import {
   getFormattedTransactions,
   getHeadTransaction,
 } from "../../helpers/transactionsFormatter";
+import useMedia from "../../hooks/useMedia";
 
 const TransactionList = () => {
   const transactions = useSelector(selectTransactions);
   const isLoading = useSelector(selectTransLoading);
+  const isError = useSelector(selectTransError);
   const categories = useSelector(selectCategories);
+  const { isMobile } = useMedia();
   const dispatch = useDispatch();
 
   // Sıralama durumunu tutmak için state
@@ -53,6 +56,10 @@ const TransactionList = () => {
     return <Loader />;
   }
 
+  if (isError) {
+    return <p className={styles.text}>Oops, something went wrong...</p>;
+  }
+
   if (!transactions || transactions.length === 0) {
     return (
       <div className={styles.emptyTransactionsContainer}>
@@ -72,30 +79,32 @@ const TransactionList = () => {
 
   return (
     <div className={styles.tableContainer}>
-      <div className={styles.tableHeader}>
-        <div className={styles.headerCell} onClick={() => requestSort("date")}>
-          Date {getSortIcon("date")}
+      {!isMobile && (
+        <div className={styles.tableHeader}>
+          <div className={styles.headerCell} onClick={() => requestSort("date")}>
+            Date {getSortIcon("date")}
+          </div>
+          <div className={styles.headerCell} onClick={() => requestSort("type")}>
+            Type {getSortIcon("type")}
+          </div>
+          <div
+            className={styles.headerCell}
+            onClick={() => requestSort("category")}
+          >
+            Category {getSortIcon("category")}
+          </div>
+          <div
+            className={styles.headerCell}
+            onClick={() => requestSort("comment")}
+          >
+            Comment {getSortIcon("comment")}
+          </div>
+          <div className={styles.headerCell} onClick={() => requestSort("sum")}>
+            Sum {getSortIcon("sum")}
+          </div>
+          <div className={styles.headerCell}></div>
         </div>
-        <div className={styles.headerCell} onClick={() => requestSort("type")}>
-          Type {getSortIcon("type")}
-        </div>
-        <div
-          className={styles.headerCell}
-          onClick={() => requestSort("category")}
-        >
-          Category {getSortIcon("category")}
-        </div>
-        <div
-          className={styles.headerCell}
-          onClick={() => requestSort("comment")}
-        >
-          Comment {getSortIcon("comment")}
-        </div>
-        <div className={styles.headerCell} onClick={() => requestSort("sum")}>
-          Sum {getSortIcon("sum")}
-        </div>
-        <div className={styles.headerCell}></div>
-      </div>
+      )}
       <ul className={styles.transactionList}>
         {getFormattedTransactions(transactions, categories, sortConfig).map(
           (transaction) => (
