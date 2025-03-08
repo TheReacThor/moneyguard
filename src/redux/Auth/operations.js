@@ -57,12 +57,8 @@ export const logoutThunk = createAsyncThunk(
   "auth/logout",
   async (_, thunkAPI) => {
     try {
-      console.log("logoutThunk çalışıyor...");
-
       // Çıkış API isteği gönderiliyor
       const { data } = await userTransactionsApi.delete("/api/auth/sign-out");
-
-      console.log("Çıkış başarılı:", data);
 
       // LocalStorage'dan token siliniyor
       removeToken();
