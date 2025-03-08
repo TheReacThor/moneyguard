@@ -11,7 +11,7 @@
 
 .select {
   border-radius: 8px;
-  background-color: #1F1F27;
+  background-color: #1f1f27;
   color: #fff;
 }
 
@@ -19,7 +19,7 @@
   .selectorContainer {
     justify-content: center;
   }
-  
+
   .selectWrapper {
     width: 150px;
   }

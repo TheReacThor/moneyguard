@@ -1,6 +1,6 @@
 .dashboardPage {
   min-height: 100vh;
-  background: linear-gradient(180deg, #2E1E5E 0%, #1F1348 100%);
+  background: linear-gradient(180deg, #2e1e5e 0%, #1f1348 100%);
   color: var(--white);
 }
 
@@ -78,7 +78,7 @@
   .statisticsContent {
     padding: 15px;
   }
-  
+
   .title {
     font-size: 24px;
     margin-bottom: 15px;
@@ -87,7 +87,7 @@
   .content {
     flex-direction: column;
   }
-  
+
   .chartSection {
     margin-bottom: 20px;
   }
@@ -111,7 +111,7 @@
   .content {
     flex-direction: column;
   }
-  
+
   .chartSection {
     margin-bottom: 20px;
   }

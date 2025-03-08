@@ -6,8 +6,6 @@ import HeaderExitSvg from "./HeaderExitSvg";
 import { Link } from "react-router-dom";
 import LogOutModal from "../LogOutModal/LogOutModal.jsx";
 
-
-
 const Header = () => {
   const email = useSelector((state) => state.auth.user?.email) || "";
   const username = email.split("@")[0] || "anonymous";
@@ -36,7 +34,7 @@ const Header = () => {
           <div>
             <button className={styles.logoutButton} onClick={handleLogoutClick}>
               <HeaderExitSvg />
-              Exit
+              <p className={styles.headerExit}>Exit</p>
             </button>
           </div>
         </div>

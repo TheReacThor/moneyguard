@@ -1,7 +1,10 @@
+import styles from "./Header.module.css";
+
 const HeaderExitSvg = () => {
   return (
     <>
       <svg
+        className={styles.headerLine}
         width="2"
         height="30"
         viewBox="0 0 2 30"

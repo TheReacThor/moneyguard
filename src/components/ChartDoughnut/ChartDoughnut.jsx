@@ -1,7 +1,7 @@
-import React from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
-import styles from './ChartDoughnut.module.css';
+import React from "react";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+import styles from "./ChartDoughnut.module.css";
 
 // ChartJS'i kaydet
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -20,9 +20,11 @@ const ChartDoughnut = ({ categoriesData, totalExpenses }) => {
   }
 
   // Kategori isimlerini ve tutarları ayır
-  const labels = categoriesData.map(item => item.name);
-  const amounts = categoriesData.map(item => Math.abs(parseFloat(item.total)));
-  const backgroundColors = categoriesData.map(item => item.color);
+  const labels = categoriesData.map((item) => item.name);
+  const amounts = categoriesData.map((item) =>
+    Math.abs(parseFloat(item.total))
+  );
+  const backgroundColors = categoriesData.map((item) => item.color);
 
   // Chart.js için veri yapısını oluştur
   const data = {
@@ -32,7 +34,7 @@ const ChartDoughnut = ({ categoriesData, totalExpenses }) => {
         data: amounts,
         backgroundColor: backgroundColors,
         borderWidth: 0,
-        cutout: '70%', // Doughnut'un iç boşluğunu ayarla
+        cutout: "70%", // Doughnut'un iç boşluğunu ayarla
       },
     ],
   };
@@ -45,14 +47,17 @@ const ChartDoughnut = ({ categoriesData, totalExpenses }) => {
       },
       tooltip: {
         callbacks: {
-          label: function(context) {
-            const label = context.label || '';
+          label: function (context) {
+            const label = context.label || "";
             const value = context.raw || 0;
-            const percentage = totalExpenses > 0 ? ((value / totalExpenses) * 100).toFixed(0) : 0;
+            const percentage =
+              totalExpenses > 0
+                ? ((value / totalExpenses) * 100).toFixed(0)
+                : 0;
             return `${label}: ${value.toFixed(2)} (${percentage}%)`;
-          }
-        }
-      }
+          },
+        },
+      },
     },
     responsive: true,
     maintainAspectRatio: false,
@@ -64,7 +69,9 @@ const ChartDoughnut = ({ categoriesData, totalExpenses }) => {
         <Doughnut data={data} options={options} />
         <div className={styles.chartCenter}>
           <span className={styles.chartCenterSymbol}>₴</span>
-          <span className={styles.chartCenterValue}>{totalExpenses.toFixed(2)}</span>
+          <span className={styles.chartCenterValue}>
+            {totalExpenses.toFixed(2)}
+          </span>
         </div>
       </div>
     </div>

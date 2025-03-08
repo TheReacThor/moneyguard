@@ -120,7 +120,12 @@ input:-webkit-autofill:active {
   text-align: center;
   color: var(--white);
   box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
-  background: linear-gradient(167deg, #ffc727 0%, #9e40ba 61.46%, #7000ff 90.54%);
+  background: linear-gradient(
+    167deg,
+    #ffc727 0%,
+    #9e40ba 61.46%,
+    #7000ff 90.54%
+  );
 }
 .buttonLogin {
   border-radius: 20px;
@@ -142,7 +147,7 @@ input:-webkit-autofill:active {
 
 @media only screen and (min-width: 768px) {
   .background {
-    background-image: url('../../assets/register-tablet.webp');
+    background-image: url("../../assets/register-tablet.webp");
   }
   .form {
     width: 409px;
@@ -189,6 +194,6 @@ input:-webkit-autofill:active {
 }
 @media only screen and (min-width: 1280px) {
   .background {
-    background-image: url('../../assets/register-desktop.webp');
+    background-image: url("../../assets/register-desktop.webp");
   }
 }

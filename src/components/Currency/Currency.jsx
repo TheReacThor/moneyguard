@@ -8,7 +8,7 @@ import styles from "./Currency.module.css";
 const Currency = () => {
   const dispatch = useDispatch();
   const currencyData = useSelector(selectCurrencyData);
-  const { isDesktop } = useMedia();
+  const { isDesktop, isTablet } = useMedia();
 
   useEffect(() => {
     dispatch(getCurrency());
@@ -40,11 +40,14 @@ const Currency = () => {
           </div>
         </div>
       </div>
-      {isDesktop && (
+      {!isTablet && isDesktop && (
         <div className={styles.diagram}>
           <p className={styles.lowerNumber}>{buyUSD}</p>
           <p className={styles.higherNumber}>{buyEUR}</p>
-          <img src={`${import.meta.env.BASE_URL}img/currency.png`} alt="Currency chart" />
+          <img
+            src={`${import.meta.env.BASE_URL}img/currency.png`}
+            alt="Currency chart"
+          />
         </div>
       )}
     </div>

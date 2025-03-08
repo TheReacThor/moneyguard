@@ -143,15 +143,11 @@ const StatisticsTable = () => {
       <div className={styles.tableSummary}>
         <div className={styles.summaryRow}>
           <div className={styles.summaryLabel}>Expenses:</div>
-          <div className={styles.summaryValue}>
-            {totalExpenses.toFixed(2)}
-          </div>
+          <div className={styles.summaryValue}>{totalExpenses.toFixed(2)}</div>
         </div>
         <div className={styles.summaryRow}>
           <div className={styles.summaryLabel}>Income:</div>
-          <div className={styles.summaryValue}>
-            {totalIncome.toFixed(2)}
-          </div>
+          <div className={styles.summaryValue}>{totalIncome.toFixed(2)}</div>
         </div>
       </div>
     </div>

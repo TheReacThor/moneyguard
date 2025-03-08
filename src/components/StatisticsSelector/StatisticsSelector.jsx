@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import Select from 'react-select';
-import { getTransactionsSummaryByPeriod } from '../../redux/Statistics/operations';
-import styles from './statisticsSelector.module.css';
-import { customStyles } from './styleSelect';
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import Select from "react-select";
+import { getTransactionsSummaryByPeriod } from "../../redux/Statistics/operations";
+import styles from "./statisticsSelector.module.css";
+import { customStyles } from "./styleSelect";
 
 const StatisticsSelector = () => {
   const dispatch = useDispatch();
@@ -12,23 +12,29 @@ const StatisticsSelector = () => {
   const currentMonth = currentDate.getMonth() + 1; // JavaScript'te aylar 0'dan başlar
 
   // Ay ve yıl için state'ler
-  const [selectedMonth, setSelectedMonth] = useState({ value: currentMonth, label: getMonthName(currentMonth) });
-  const [selectedYear, setSelectedYear] = useState({ value: currentYear, label: currentYear.toString() });
+  const [selectedMonth, setSelectedMonth] = useState({
+    value: currentMonth,
+    label: getMonthName(currentMonth),
+  });
+  const [selectedYear, setSelectedYear] = useState({
+    value: currentYear,
+    label: currentYear.toString(),
+  });
 
   // Ay seçenekleri
   const monthOptions = [
-    { value: 1, label: 'January' },
-    { value: 2, label: 'February' },
-    { value: 3, label: 'March' },
-    { value: 4, label: 'April' },
-    { value: 5, label: 'May' },
-    { value: 6, label: 'June' },
-    { value: 7, label: 'July' },
-    { value: 8, label: 'August' },
-    { value: 9, label: 'September' },
-    { value: 10, label: 'October' },
-    { value: 11, label: 'November' },
-    { value: 12, label: 'December' }
+    { value: 1, label: "January" },
+    { value: 2, label: "February" },
+    { value: 3, label: "March" },
+    { value: 4, label: "April" },
+    { value: 5, label: "May" },
+    { value: 6, label: "June" },
+    { value: 7, label: "July" },
+    { value: 8, label: "August" },
+    { value: 9, label: "September" },
+    { value: 10, label: "October" },
+    { value: 11, label: "November" },
+    { value: 12, label: "December" },
   ];
 
   // Yıl seçenekleri (son 5 yıl)
@@ -51,8 +57,18 @@ const StatisticsSelector = () => {
   // Ay adını döndüren yardımcı fonksiyon
   function getMonthName(monthNumber) {
     const monthNames = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
     ];
     return monthNames[monthNumber - 1];
   }
@@ -60,10 +76,12 @@ const StatisticsSelector = () => {
   // Seçilen ay veya yıl değiştiğinde istatistikleri getir
   useEffect(() => {
     if (selectedMonth && selectedYear) {
-      dispatch(getTransactionsSummaryByPeriod({
-        month: selectedMonth.value,
-        year: selectedYear.value
-      }));
+      dispatch(
+        getTransactionsSummaryByPeriod({
+          month: selectedMonth.value,
+          year: selectedYear.value,
+        })
+      );
     }
   }, [selectedMonth, selectedYear, dispatch]);
 
