@@ -79,30 +79,38 @@ const TransactionList = () => {
 
   return (
     <div className={styles.tableContainer}>
-      <div className={styles.tableHeader}>
-        <div className={styles.headerCell} onClick={() => requestSort("date")}>
-          Date {getSortIcon("date")}
+      {!isMobile && (
+        <div className={styles.tableHeader}>
+          <div
+            className={styles.headerCell}
+            onClick={() => requestSort("date")}
+          >
+            Date {getSortIcon("date")}
+          </div>
+          <div
+            className={styles.headerCell}
+            onClick={() => requestSort("type")}
+          >
+            Type {getSortIcon("type")}
+          </div>
+          <div
+            className={styles.headerCell}
+            onClick={() => requestSort("category")}
+          >
+            Category {getSortIcon("category")}
+          </div>
+          <div
+            className={styles.headerCell}
+            onClick={() => requestSort("comment")}
+          >
+            Comment {getSortIcon("comment")}
+          </div>
+          <div className={styles.headerCell} onClick={() => requestSort("sum")}>
+            Sum {getSortIcon("sum")}
+          </div>
+          <div className={styles.headerCell}></div>
         </div>
-        <div className={styles.headerCell} onClick={() => requestSort("type")}>
-          Type {getSortIcon("type")}
-        </div>
-        <div
-          className={styles.headerCell}
-          onClick={() => requestSort("category")}
-        >
-          Category {getSortIcon("category")}
-        </div>
-        <div
-          className={styles.headerCell}
-          onClick={() => requestSort("comment")}
-        >
-          Comment {getSortIcon("comment")}
-        </div>
-        <div className={styles.headerCell} onClick={() => requestSort("sum")}>
-          Sum {getSortIcon("sum")}
-        </div>
-        <div className={styles.headerCell}></div>
-      </div>
+      )}
       <ul className={styles.transactionList}>
         {getFormattedTransactions(transactions, categories, sortConfig).map(
           (transaction) => (

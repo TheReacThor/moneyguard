@@ -53,8 +53,7 @@ function App() {
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      <ModalAddTransaction />
-      <ModalEditTransaction />
+
       <ToastContainer
         position="top-right"
         autoClose={3000}
